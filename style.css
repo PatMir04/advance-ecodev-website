@@ -802,6 +802,24 @@ footer {
   }
 }
 
+/* --- Scroll Animation Styles --- */
+.animate-on-scroll {
+  opacity: 0; /* Start hidden */
+  transform: translateY(30px); /* Start slightly lower */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide up to original position */
+}
+
+/* Optional: Stagger animation for grid items */
+/* This requires JS adjustment to add delay based on item index */
+/* .expertise-item, .case-study {
+    transition-delay: calc(0.1s * var(--animation-order, 0));
+} */
+
 @media (max-width: 480px) { /* Smaller mobile */
     body {
         font-size: 15px; /* Slightly smaller base font */

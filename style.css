@@ -1,138 +1,519 @@
-/* Basic Reset & Body Styling */
+/* --- Keep Existing Styles (Basic Reset, Header, Basic Buttons, Forms) --- */
+
+/* --- Add/Update Styles Below --- */
+
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Example modern font */
+    line-height: 1.7;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #ffffff; /* Cleaner background */
     color: #333;
 }
 
 .container {
-    width: 80%;
+    width: 90%; /* Wider container for modern look */
+    max-width: 1200px; /* Max width */
     margin: auto;
     overflow: hidden;
     padding: 0 20px;
 }
 
-/* Header & Navigation */
+/* Header Adjustments */
 header {
-    background: #005f40; /* A green shade for eco theme */
-    color: #ffffff;
-    padding-top: 20px;
-    min-height: 70px;
-    border-bottom: #003e2a 3px solid;
+    background: #ffffff; /* White header */
+    color: #333; /* Dark text */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0; /* Lighter border */
+    position: sticky; /* Sticky header */
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
 }
 
 header a {
-    color: #ffffff;
+    color: #005f40; /* Green links */
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600; /* Slightly bolder */
+}
+
+header #branding h1 a {
+    color: #333; /* Branding text color */
+    text-transform: none;
+    font-size: 24px;
+    font-weight: 700;
+}
+header #branding h1 .highlight {
+     color: #005f40; /* Highlight color */
 }
 
 header ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    float: right;
-    margin-top: 10px;
+     margin-top: 5px; /* Adjust alignment */
 }
 
 header li {
-    display: inline;
-    padding: 0 20px 0 20px;
+    padding: 0 15px;
 }
 
-header #branding {
-    float: left;
+header .current a, header a:hover {
+    color: #e8491d; /* Accent color for current/hover */
+    font-weight: 700;
 }
 
-header #branding h1 {
-    margin: 0;
-    padding-bottom: 10px; /* Adjust padding */
-}
 
-header nav {
-    margin-top: 10px;
-}
-
-header .highlight, header .current a {
-    color: #a7dbd8; /* A lighter accent color */
-    font-weight: bold;
-}
-
-header a:hover {
-    color: #cccccc;
-    font-weight: bold;
-}
-
-/* Main Content Area */
-main {
-    padding: 30px 0;
-    min-height: 400px; /* Ensure footer doesn't jump up */
-}
-
-main h1, main h2 {
-    color: #005f40;
-}
-
+/* General Section Styling */
 section {
-    margin-bottom: 20px;
-    padding: 20px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 40px 0; /* Vertical padding for sections */
+    margin-bottom: 0;
+    border: none;
+    background: none;
+    border-radius: 0;
+}
+section:nth-child(even) {
+     background-color: #f8f9fa; /* Subtle alternating background */
 }
 
-/* Footer */
-footer {
-    padding: 20px;
-    margin-top: 20px;
-    color: #ffffff;
-    background-color: #003e2a; /* Darker green */
+main h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #003e2a; /* Darker green for headings */
+}
+
+.text-center {
     text-align: center;
 }
 
-/* Basic Button Style */
-.button {
-    display: inline-block;
-    background: #e8491d; /* Example accent color */
+/* --- 1. Hero Section --- */
+#hero {
+    background: #005f40 url('hero-background.jpg') no-repeat center center/cover; /* Add a background image */
     color: #ffffff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    cursor: pointer;
+    padding: 80px 0;
+    text-align: center;
+    min-height: 350px; /* Ensure it takes substantial space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.button:hover {
-    background: #333;
-    color: #fff;
+#hero h1 {
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Text shadow for readability */
 }
 
-/* Basic Form Styling */
-.contact-form label {
+#hero .subheading {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons .button {
+    margin: 0 10px;
+    padding: 12px 25px;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 25px; /* Rounded buttons */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cta-buttons .button:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.button-primary {
+    background: #e8491d; /* Primary action color */
+    color: #ffffff;
+    border: 2px solid #e8491d;
+}
+.button-primary:hover {
+     background: #c4340a;
+     border-color: #c4340a;
+     color: #ffffff;
+}
+
+
+.button-secondary {
+    background: transparent;
+    color: #ffffff; /* White text for hero */
+    border: 2px solid #ffffff; /* White border for hero */
+}
+/* Secondary button outside hero */
+section .button-secondary {
+    background: #6c757d; /* Grey for non-hero secondary */
+    color: #ffffff;
+    border: 2px solid #6c757d;
+}
+section .button-secondary:hover {
+    background: #5a6268;
+    border-color: #5a6268;
+    color: #ffffff;
+}
+#hero .button-secondary:hover {
+     background: #ffffff;
+     color: #005f40; /* Change text color on hover */
+}
+
+/* --- 2. Intro Section --- */
+#intro p {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* --- 3. Core Services & Expertise --- */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.expertise-item {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.expertise-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.expertise-item .icon-placeholder {
+    font-size: 2.5em; /* Make emoji/icon larger */
     display: block;
-    margin: 10px 0 5px;
+    margin-bottom: 15px;
+    color: #005f40;
 }
 
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
+.expertise-item h3 {
+    font-size: 1.1em;
+    margin: 0;
+}
+.expertise-item h3 a {
+    text-decoration: none;
+    color: #003e2a;
+}
+.expertise-item h3 a:hover {
+     color: #e8491d;
+}
+
+/* --- 4. Key Differentiators --- */
+#differentiators {
+     background-color: #f8f9fa; /* Light background */
+}
+.differentiator-list {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    max-width: 800px;
+    margin: 20px auto 0 auto; /* Center the list */
+}
+
+.differentiator-list li {
+    background: #ffffff; /* White background for items */
+    margin-bottom: 15px;
+    padding: 15px 20px;
+    border-left: 5px solid #005f40; /* Accent border */
+    font-size: 1.05em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.differentiator-list li strong {
+    color: #003e2a;
+    display: block; /* Make strong text block for emphasis */
+    margin-bottom: 5px;
+}
+
+
+/* --- 5. Impact Metrics --- */
+#impact-metrics {
+    background: #003e2a; /* Dark green background */
+    color: #ffffff;
+    padding: 50px 0;
+}
+#impact-metrics h2 {
+    color: #ffffff; /* White heading on dark background */
+    margin-bottom: 40px;
+}
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px;
+}
+
+.metric-item {
+    /* No background needed as section has bg color */
+}
+
+.metric-number {
+    display: block;
+    font-size: 3em;
+    font-weight: 700;
+    color: #a7dbd8; /* Accent color for numbers */
+    line-height: 1.1;
+}
+
+.metric-label {
+    display: block;
+    font-size: 1em;
+    color: #e0e0e0; /* Lighter text for labels */
+}
+
+/* --- 6. Testimonials --- */
+#testimonials {
+     background-color: #f8f9fa;
+}
+.testimonial-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.testimonial {
+    background: #ffffff;
+    border-left: 5px solid #e8491d; /* Accent color */
+    padding: 25px;
+    margin: 0; /* Reset margin */
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    font-style: italic;
+}
+
+.testimonial p {
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    color: #555;
+}
+
+.testimonial footer {
+    font-style: normal;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+}
+
+/* --- 7. Case Studies --- */
+.case-study-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.case-study {
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden; /* Keep image corners rounded */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.case-study:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.case-study img {
     width: 100%;
-    padding: 10px;
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover; /* Ensure image covers space nicely */
+    display: block;
+}
+
+.case-study h3 {
+    font-size: 1.3em;
+    color: #005f40;
+    margin: 15px 20px 10px 20px;
+}
+
+.case-study p {
+    padding: 0 20px 15px 20px;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 15px; /* Space before button */
+}
+.case-study .button {
+    display: block; /* Make button full width of padding */
+    margin: 0 20px 20px 20px;
+    text-align: center;
+    border-radius: 5px; /* Less rounded than hero buttons */
+}
+
+/* --- 8. Insights & Resources --- */
+#resources {
+     background-color: #f8f9fa;
+}
+.resource-list {
+    list-style: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 20px auto 0 auto;
+    text-align: center; /* Center list items */
+}
+
+.resource-list li {
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.contact-form textarea {
-    height: 150px;
+.resource-list a {
+    text-decoration: none;
+    color: #005f40;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+.resource-list a:hover {
+    color: #e8491d;
+    text-decoration: underline;
 }
 
-.contact-form button {
-    width: 100%;
+/* --- 9. Bottom Call-to-Action --- */
+#bottom-cta {
+    background: #005f40; /* Match hero background */
+    color: #ffffff;
+    padding: 50px 0;
+}
+#bottom-cta h2 {
+    color: #ffffff;
+}
+#bottom-cta p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+#bottom-cta .button-primary {
+     background: #e8491d;
+     border-color: #e8491d;
+}
+#bottom-cta .button-primary:hover {
+     background: #ffffff;
+     color: #e8491d;
+     border-color: #ffffff;
+}
+#bottom-cta .button-secondary {
+    background: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+#bottom-cta .button-secondary:hover {
+    background: #ffffff;
+    color: #005f40;
+}
+
+
+/* --- 10. Footer --- */
+footer {
+    background-color: #003e2a; /* Darker green */
+    color: #e0e0e0; /* Lighter text for footer */
+    padding: 30px 0 10px 0; /* Adjust padding */
+    margin-top: 0; /* Remove top margin as sections handle spacing */
+    font-size: 0.9em;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 20px;
+    text-align: left; /* Align text left in grid items */
+}
+
+.footer-info p, .footer-nav p, .footer-social p {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.footer-info a, .footer-nav a, .footer-social a {
+    color: #a7dbd8; /* Accent color for links */
+    text-decoration: none;
+}
+.footer-info a:hover, .footer-nav a:hover, .footer-social a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav li {
+    margin-bottom: 8px;
+}
+
+.footer-social a {
+    margin-right: 10px;
+    display: inline-block; /* Ensure spacing works */
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #005f40; /* Subtle separator */
+    font-size: 0.85em;
+    color: #ccc;
+}
+
+
+/* --- Basic Responsiveness --- */
+@media (max-width: 768px) {
+    header #branding {
+        float: none;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    header nav, header nav ul {
+        float: none;
+        text-align: center;
+    }
+    header nav li {
+        display: block;
+        padding: 10px 0;
+    }
+
+    #hero h1 {
+        font-size: 2.2em;
+    }
+    #hero .subheading {
+        font-size: 1em;
+    }
+    .cta-buttons .button {
+        display: block;
+        margin: 10px auto;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .expertise-grid, .metrics-grid, .case-study-grid, .testimonial-container, .footer-content {
+        grid-template-columns: 1fr; /* Stack elements */
+        gap: 20px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 0 15px;
+    }
+
+    main h2 {
+        font-size: 1.8em;
+    }
+
+     .footer-content {
+        text-align: center;
+    }
+    .footer-info, .footer-nav, .footer-social {
+         margin-bottom: 20px;
+    }
 }

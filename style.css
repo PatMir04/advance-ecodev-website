@@ -1,519 +1,718 @@
-/* --- Keep Existing Styles (Basic Reset, Header, Basic Buttons, Forms) --- */
+/* --- CSS Variables (Theme Configuration) --- */
+:root {
+  --primary-blue: #014f86; /* A strong, trustworthy blue */
+  --dark-blue: #013a63;   /* A darker shade for contrast/footers */
+  --accent-orange: #e8491d; /* Kept for high-visibility CTAs */
+  --light-blue-accent: #a9d6e5; /* Lighter blue for subtle highlights */
 
-/* --- Add/Update Styles Below --- */
+  --text-dark: #333333;      /* Main text color */
+  --text-medium: #555555;   /* Slightly lighter text */
+  --text-light: #ffffff;     /* Text on dark backgrounds */
+  --text-on-alt-bg: #e0e0e0; /* Text color for light accents on dark bg */
+
+  --background-light: #ffffff; /* Main background */
+  --background-alt: #f8f9fa;   /* Alternating section background */
+  --border-light: #e0e0e0;   /* Subtle borders */
+
+  --font-stack: "Avenir Book", "Avenir Next", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-weight-book: 400;    /* Corresponds to 'Book' or 'Regular' */
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --container-width: 90%;
+  --container-max-width: 1200px;
+  --border-radius-small: 5px;
+  --border-radius-medium: 8px;
+  --border-radius-large: 25px; /* For rounded buttons */
+
+  --transition-speed: 0.3s;
+}
+
+/* --- Basic Reset & Body Styling --- */
+*, *::before, *::after {
+  box-sizing: border-box; /* Better box model */
+}
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Example modern font */
-    line-height: 1.7;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff; /* Cleaner background */
-    color: #333;
+  font-family: var(--font-stack);
+  font-weight: var(--font-weight-book);
+  line-height: 1.7; /* Slightly increased for readability */
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased; /* Smoother fonts on WebKit */
+  -moz-osx-font-smoothing: grayscale;  /* Smoother fonts on Firefox */
 }
 
 .container {
-    width: 90%; /* Wider container for modern look */
-    max-width: 1200px; /* Max width */
-    margin: auto;
-    overflow: hidden;
-    padding: 0 20px;
+  width: var(--container-width);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* Header Adjustments */
+/* --- Header --- */
 header {
-    background: #ffffff; /* White header */
-    color: #333; /* Dark text */
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0; /* Lighter border */
-    position: sticky; /* Sticky header */
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+  background: var(--background-light);
+  color: var(--text-dark);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Slightly softer shadow */
 }
 
 header a {
-    color: #005f40; /* Green links */
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 15px;
-    font-weight: 600; /* Slightly bolder */
+  color: var(--primary-blue);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  transition: color var(--transition-speed) ease;
+}
+
+header #branding {
+  float: left; /* Keep float for simple layout */
+  padding-top: 2px; /* Fine-tune vertical alignment */
+}
+
+header #branding h1 {
+    margin: 0;
 }
 
 header #branding h1 a {
-    color: #333; /* Branding text color */
-    text-transform: none;
-    font-size: 24px;
-    font-weight: 700;
+  color: var(--text-dark);
+  text-transform: none;
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
 }
+
 header #branding h1 .highlight {
-     color: #005f40; /* Highlight color */
+  color: var(--primary-blue);
+}
+
+header nav {
+  float: right; /* Keep float */
+  margin-top: 5px; /* Align nav items with branding baseline */
 }
 
 header ul {
-     margin-top: 5px; /* Adjust alignment */
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 header li {
-    padding: 0 15px;
+  display: inline-block; /* Use inline-block for better control */
+  margin-left: 25px; /* Space out nav items */
+}
+header li:first-child {
+    margin-left: 0;
 }
 
-header .current a, header a:hover {
-    color: #e8491d; /* Accent color for current/hover */
-    font-weight: 700;
+
+header .current a,
+header a:hover {
+  color: var(--accent-orange);
+}
+
+/* Clearfix for floated header elements */
+header .container::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 
-/* General Section Styling */
+/* --- General Section Styling --- */
 section {
-    padding: 40px 0; /* Vertical padding for sections */
-    margin-bottom: 0;
-    border: none;
-    background: none;
-    border-radius: 0;
+  padding: 60px 0; /* Increased padding for more whitespace */
+  border: none;
+  background: none;
 }
+
 section:nth-child(even) {
-     background-color: #f8f9fa; /* Subtle alternating background */
+  background-color: var(--background-alt);
+}
+
+main h1, main h2, main h3 {
+    font-weight: var(--font-weight-bold); /* Bolder headings */
 }
 
 main h2 {
-    font-size: 2em;
-    margin-bottom: 30px;
-    color: #003e2a; /* Darker green for headings */
+  font-size: 2.2em; /* Slightly larger section headings */
+  margin-bottom: 40px; /* More space below headings */
+  color: var(--dark-blue); /* Use dark blue for headings */
+  text-align: center; /* Center all section headings by default */
 }
 
-.text-center {
-    text-align: center;
+main h3 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    color: var(--primary-blue);
 }
+
+.text-center { /* Utility class remains useful */
+  text-align: center;
+}
+
 
 /* --- 1. Hero Section --- */
 #hero {
-    background: #005f40 url('hero-background.jpg') no-repeat center center/cover; /* Add a background image */
-    color: #ffffff;
-    padding: 80px 0;
-    text-align: center;
-    min-height: 350px; /* Ensure it takes substantial space */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* Example with overlay for better text contrast if using background image */
+  /* background: linear-gradient(rgba(1, 79, 134, 0.8), rgba(1, 79, 134, 0.8)), url('hero-background.jpg') no-repeat center center/cover; */
+  background-color: var(--primary-blue); /* Solid blue fallback */
+  color: var(--text-light);
+  padding: 100px 0; /* More padding */
+  text-align: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: center;
+  justify-content: center;
 }
 
 #hero h1 {
-    font-size: 2.8em;
-    margin-bottom: 15px;
-    color: #ffffff;
-    font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Text shadow for readability */
+  font-size: 3em; /* Larger hero heading */
+  margin-bottom: 20px;
+  color: var(--text-light);
+  font-weight: var(--font-weight-bold);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  max-width: 900px; /* Constrain width */
 }
 
 #hero .subheading {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+  font-size: 1.3em;
+  margin-bottom: 35px;
+  max-width: 750px;
+  font-weight: var(--font-weight-book);
+  opacity: 0.9; /* Slightly less emphasis */
 }
 
 .cta-buttons .button {
-    margin: 0 10px;
-    padding: 12px 25px;
-    font-size: 1em;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-radius: 25px; /* Rounded buttons */
-    transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 5px 10px; /* Adjust spacing */
+  padding: 14px 30px; /* Slightly larger buttons */
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-large);
+  transition: background-color var(--transition-speed) ease,
+              transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease; /* Add shadow transition */
+  border: 2px solid transparent; /* Reserve space for border */
+  display: inline-block; /* Ensure buttons behave well */
+  cursor: pointer;
 }
 
 .cta-buttons .button:hover {
-    transform: translateY(-2px); /* Slight lift on hover */
+  transform: translateY(-3px); /* Slightly more lift */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .button-primary {
-    background: #e8491d; /* Primary action color */
-    color: #ffffff;
-    border: 2px solid #e8491d;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  border-color: var(--accent-orange);
 }
 .button-primary:hover {
-     background: #c4340a;
-     border-color: #c4340a;
-     color: #ffffff;
+  background: #c4340a; /* Darken orange */
+  border-color: #c4340a;
+  color: var(--text-light);
 }
-
 
 .button-secondary {
-    background: transparent;
-    color: #ffffff; /* White text for hero */
-    border: 2px solid #ffffff; /* White border for hero */
+  background: transparent;
+  color: var(--text-light); /* Default for hero */
+  border-color: var(--text-light); /* Default for hero */
 }
-/* Secondary button outside hero */
+/* Secondary button styles outside hero */
 section .button-secondary {
-    background: #6c757d; /* Grey for non-hero secondary */
-    color: #ffffff;
-    border: 2px solid #6c757d;
+  background: var(--text-medium); /* Grey secondary button */
+  color: var(--text-light);
+  border-color: var(--text-medium);
 }
 section .button-secondary:hover {
-    background: #5a6268;
-    border-color: #5a6268;
-    color: #ffffff;
+  background: var(--text-dark);
+  border-color: var(--text-dark);
+  color: var(--text-light);
 }
+/* Hero specific hover for secondary */
 #hero .button-secondary:hover {
-     background: #ffffff;
-     color: #005f40; /* Change text color on hover */
+  background: var(--text-light);
+  color: var(--primary-blue);
 }
 
 /* --- 2. Intro Section --- */
-#intro p {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 1.1em;
-    color: #555;
+#intro h2 {
+    margin-bottom: 20px; /* Less margin if centered text follows */
 }
+#intro p {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1em;
+  color: var(--text-medium);
+  text-align: center; /* Ensure intro paragraph is centered */
+}
+
 
 /* --- 3. Core Services & Expertise --- */
 .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive grid */
-    gap: 30px;
-    text-align: center;
-    margin-top: 40px;
+  display: grid;
+  /* Adjust minmax for potentially wider items if needed */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  text-align: center;
+  margin-top: 40px;
 }
 
 .expertise-item {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--background-light);
+  padding: 30px 25px; /* More vertical padding */
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06); /* Subtler shadow */
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
 }
 .expertise-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transform: translateY(-6px); /* More lift */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .expertise-item .icon-placeholder {
-    font-size: 2.5em; /* Make emoji/icon larger */
-    display: block;
-    margin-bottom: 15px;
-    color: #005f40;
+  font-size: 3em; /* Larger icons */
+  display: block;
+  margin-bottom: 20px;
+  color: var(--primary-blue); /* Use primary blue for icons */
 }
 
 .expertise-item h3 {
-    font-size: 1.1em;
-    margin: 0;
+  font-size: 1.2em; /* Slightly larger heading */
+  margin: 0;
+  color: var(--dark-blue); /* Darker blue heading */
 }
 .expertise-item h3 a {
-    text-decoration: none;
-    color: #003e2a;
+  text-decoration: none;
+  color: inherit; /* Inherit color from h3 */
+  transition: color var(--transition-speed) ease;
 }
 .expertise-item h3 a:hover {
-     color: #e8491d;
+  color: var(--accent-orange);
 }
 
 /* --- 4. Key Differentiators --- */
 #differentiators {
-     background-color: #f8f9fa; /* Light background */
+  background-color: var(--background-alt);
 }
 .differentiator-list {
-    list-style: none; /* Remove default bullets */
-    padding: 0;
-    max-width: 800px;
-    margin: 20px auto 0 auto; /* Center the list */
+  list-style: none;
+  padding: 0;
+  max-width: 850px; /* Slightly wider */
+  margin: 30px auto 0 auto;
 }
 
 .differentiator-list li {
-    background: #ffffff; /* White background for items */
-    margin-bottom: 15px;
-    padding: 15px 20px;
-    border-left: 5px solid #005f40; /* Accent border */
-    font-size: 1.05em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  background: var(--background-light);
+  margin-bottom: 15px;
+  padding: 20px 25px;
+  border-left: 5px solid var(--primary-blue); /* Blue accent border */
+  font-size: 1.05em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
+/* Add hover effect */
+.differentiator-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
 .differentiator-list li strong {
-    color: #003e2a;
-    display: block; /* Make strong text block for emphasis */
-    margin-bottom: 5px;
+  color: var(--dark-blue); /* Dark blue for emphasis */
+  display: block;
+  margin-bottom: 5px;
+  font-weight: var(--font-weight-semibold);
 }
 
 
 /* --- 5. Impact Metrics --- */
 #impact-metrics {
-    background: #003e2a; /* Dark green background */
-    color: #ffffff;
-    padding: 50px 0;
+  background: var(--dark-blue); /* Use dark blue */
+  color: var(--text-light);
+  padding: 60px 0;
 }
 #impact-metrics h2 {
-    color: #ffffff; /* White heading on dark background */
-    margin-bottom: 40px;
+  color: var(--text-light);
+  margin-bottom: 50px; /* More space */
 }
 .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Ensure enough space */
+  gap: 30px 20px; /* Row and column gap */
+  text-align: center;
 }
 
 .metric-item {
-    /* No background needed as section has bg color */
+    /* Styling is mainly on text elements */
 }
 
 .metric-number {
-    display: block;
-    font-size: 3em;
-    font-weight: 700;
-    color: #a7dbd8; /* Accent color for numbers */
-    line-height: 1.1;
+  display: block;
+  font-size: 3.2em; /* Slightly larger */
+  font-weight: var(--font-weight-bold);
+  color: var(--light-blue-accent); /* Use light blue accent */
+  line-height: 1.1;
+  margin-bottom: 5px; /* Space between number and label */
 }
 
 .metric-label {
-    display: block;
-    font-size: 1em;
-    color: #e0e0e0; /* Lighter text for labels */
+  display: block;
+  font-size: 1em;
+  color: var(--text-on-alt-bg); /* Specific color for this text */
+  font-weight: var(--font-weight-semibold);
 }
 
 /* --- 6. Testimonials --- */
 #testimonials {
-     background-color: #f8f9fa;
+  background-color: var(--background-alt);
 }
 .testimonial-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly wider min */
+  gap: 35px; /* More gap */
+  max-width: 1100px; /* Wider container */
+  margin: 0 auto;
 }
 .testimonial {
-    background: #ffffff;
-    border-left: 5px solid #e8491d; /* Accent color */
-    padding: 25px;
-    margin: 0; /* Reset margin */
-    border-radius: 5px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    font-style: italic;
+  background: var(--background-light);
+  border-left: 5px solid var(--accent-orange); /* Keep orange accent */
+  padding: 30px; /* More padding */
+  margin: 0;
+  border-radius: var(--border-radius-small);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  font-style: italic;
 }
 
 .testimonial p {
-    margin-bottom: 15px;
-    font-size: 1.05em;
-    color: #555;
+  margin-bottom: 20px; /* More space before footer */
+  font-size: 1.1em; /* Slightly larger quote */
+  color: var(--text-medium);
+  line-height: 1.6; /* Ensure good line height for quotes */
 }
+/* Add quote marks visually */
+.testimonial p::before {
+    content: '“';
+    font-size: 2em;
+    color: var(--accent-orange);
+    opacity: 0.6;
+    margin-right: 5px;
+    position: relative;
+    top: 10px;
+}
+
 
 .testimonial footer {
-    font-style: normal;
-    font-weight: bold;
-    color: #333;
-    text-align: right;
+  font-style: normal;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-dark);
+  text-align: right;
+}
+.testimonial footer::before {
+    content: "— "; /* Em dash before source */
 }
 
+
 /* --- 7. Case Studies --- */
+#case-studies h2 {
+    margin-bottom: 50px;
+}
 .case-study-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); /* Adjust min width */
+  gap: 35px;
 }
 
 .case-study {
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden; /* Keep image corners rounded */
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--background-light);
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Refined shadow */
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+  display: flex; /* Use flexbox for better control */
+  flex-direction: column; /* Stack image, content, button */
 }
 .case-study:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
 .case-study img {
-    width: 100%;
-    height: 200px; /* Fixed height for consistency */
-    object-fit: cover; /* Ensure image covers space nicely */
-    display: block;
+  width: 100%;
+  height: 220px; /* Slightly taller image */
+  object-fit: cover;
+  display: block;
 }
 
-.case-study h3 {
-    font-size: 1.3em;
-    color: #005f40;
-    margin: 15px 20px 10px 20px;
+.case-study-content {
+    padding: 25px; /* Consistent padding */
+    flex-grow: 1; /* Allow content to fill space */
+    display: flex;
+    flex-direction: column;
 }
 
-.case-study p {
-    padding: 0 20px 15px 20px;
-    font-size: 0.95em;
-    color: #555;
-    margin-bottom: 15px; /* Space before button */
+.case-study-content h3 {
+  font-size: 1.4em; /* Larger case study title */
+  color: var(--primary-blue); /* Blue heading */
+  margin-top: 0; /* Remove top margin */
+  margin-bottom: 10px;
+}
+
+.case-study-content p {
+  font-size: 1em; /* Standard paragraph size */
+  color: var(--text-medium);
+  line-height: 1.6;
+  flex-grow: 1; /* Push button to bottom */
+  margin-bottom: 20px; /* Space before button */
 }
 .case-study .button {
-    display: block; /* Make button full width of padding */
-    margin: 0 20px 20px 20px;
-    text-align: center;
-    border-radius: 5px; /* Less rounded than hero buttons */
+  /* Use the general button style defined earlier */
+  /* Apply specific overrides if needed, e.g., making it secondary */
+  margin-top: auto; /* Push button to bottom */
+  align-self: flex-start; /* Align button left */
+  padding: 10px 25px; /* Adjust padding */
+  border-radius: var(--border-radius-small); /* Standard radius */
+  font-weight: var(--font-weight-semibold);
 }
+
 
 /* --- 8. Insights & Resources --- */
 #resources {
-     background-color: #f8f9fa;
+  background-color: var(--background-alt);
 }
 .resource-list {
-    list-style: none;
-    padding: 0;
-    max-width: 800px;
-    margin: 20px auto 0 auto;
-    text-align: center; /* Center list items */
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+  text-align: center;
 }
 
 .resource-list li {
-    margin-bottom: 10px;
+  margin-bottom: 15px; /* More space between items */
+  font-size: 1.1em; /* Slightly larger links */
 }
 
 .resource-list a {
-    text-decoration: none;
-    color: #005f40;
-    font-weight: 600;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: var(--primary-blue); /* Blue links */
+  font-weight: var(--font-weight-semibold);
+  transition: color var(--transition-speed) ease;
+  position: relative; /* For potential underline effect */
+  padding-bottom: 3px; /* Space for underline */
+}
+/* Underline hover effect */
+.resource-list a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-orange);
+    transition: width var(--transition-speed) ease;
 }
 .resource-list a:hover {
-    color: #e8491d;
-    text-decoration: underline;
+  color: var(--accent-orange); /* Orange on hover */
+  text-decoration: none; /* Remove default underline */
 }
+.resource-list a:hover::after {
+    width: 100%; /* Expand underline on hover */
+}
+
 
 /* --- 9. Bottom Call-to-Action --- */
 #bottom-cta {
-    background: #005f40; /* Match hero background */
-    color: #ffffff;
-    padding: 50px 0;
+  background: var(--primary-blue); /* Use primary blue */
+  color: var(--text-light);
+  padding: 60px 0;
+  text-align: center;
 }
 #bottom-cta h2 {
-    color: #ffffff;
+  color: var(--text-light);
+  margin-bottom: 15px; /* Less space before paragraph */
 }
 #bottom-cta p {
-    font-size: 1.1em;
-    margin-bottom: 30px;
+  font-size: 1.2em; /* Larger text */
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
 }
+/* Use hero button styles directly */
 #bottom-cta .button-primary {
-     background: #e8491d;
-     border-color: #e8491d;
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
 }
 #bottom-cta .button-primary:hover {
-     background: #ffffff;
-     color: #e8491d;
-     border-color: #ffffff;
+  background: var(--text-light); /* White background */
+  color: var(--accent-orange); /* Orange text */
+  border-color: var(--text-light); /* White border */
 }
 #bottom-cta .button-secondary {
-    background: transparent;
-    color: #ffffff;
-    border-color: #ffffff;
+  /* If you add a secondary button here, style it like hero's secondary */
+  background: transparent;
+  color: var(--text-light);
+  border-color: var(--text-light);
 }
 #bottom-cta .button-secondary:hover {
-    background: #ffffff;
-    color: #005f40;
+  background: var(--text-light);
+  color: var(--primary-blue);
 }
 
 
 /* --- 10. Footer --- */
 footer {
-    background-color: #003e2a; /* Darker green */
-    color: #e0e0e0; /* Lighter text for footer */
-    padding: 30px 0 10px 0; /* Adjust padding */
-    margin-top: 0; /* Remove top margin as sections handle spacing */
-    font-size: 0.9em;
+  background-color: var(--dark-blue); /* Dark blue footer */
+  color: var(--text-on-alt-bg);
+  padding: 40px 0 20px 0; /* Adjust padding */
+  font-size: 0.9em;
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 20px;
-    text-align: left; /* Align text left in grid items */
+  display: grid;
+  /* Optimize grid for common footer layouts (info, nav, social) */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px 40px; /* Adjust gap */
+  margin-bottom: 30px;
+  text-align: left;
 }
 
 .footer-info p, .footer-nav p, .footer-social p {
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #ffffff;
+  margin-bottom: 15px; /* More space */
+  font-weight: var(--font-weight-bold);
+  color: var(--text-light);
+  font-size: 1.1em; /* Slightly larger footer headings */
 }
 
 .footer-info a, .footer-nav a, .footer-social a {
-    color: #a7dbd8; /* Accent color for links */
-    text-decoration: none;
+  color: var(--light-blue-accent); /* Light blue links */
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
 }
 .footer-info a:hover, .footer-nav a:hover, .footer-social a:hover {
-    color: #ffffff;
-    text-decoration: underline;
+  color: var(--text-light);
+  text-decoration: underline;
 }
 
 .footer-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-nav li {
-    margin-bottom: 8px;
+  margin-bottom: 10px; /* More space between links */
 }
 
 .footer-social a {
-    margin-right: 10px;
-    display: inline-block; /* Ensure spacing works */
+  margin-right: 15px; /* More space for social icons */
+  display: inline-block;
+  /* Add styling for actual icons later */
+  /* Example: width: 30px; height: 30px; text-align: center; line-height: 30px; border-radius: 50%; background: rgba(255,255,255,0.1); */
+}
+.footer-social a:last-child {
+    margin-right: 0;
 }
 
 .footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #005f40; /* Subtle separator */
-    font-size: 0.85em;
-    color: #ccc;
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--primary-blue); /* Use primary blue for separator */
+  font-size: 0.9em; /* Slightly larger copyright text */
+  color: #ccc; /* Keep light grey */
 }
 
 
 /* --- Basic Responsiveness --- */
-@media (max-width: 768px) {
-    header #branding {
-        float: none;
-        text-align: center;
-        margin-bottom: 10px;
+@media (max-width: 992px) { /* Adjust breakpoint for tablets */
+    .container {
+        width: 92%;
     }
-    header nav, header nav ul {
-        float: none;
-        text-align: center;
+    main h2 {
+        font-size: 2em;
     }
-    header nav li {
-        display: block;
-        padding: 10px 0;
-    }
-
     #hero h1 {
-        font-size: 2.2em;
+        font-size: 2.6em;
     }
     #hero .subheading {
-        font-size: 1em;
+        font-size: 1.2em;
     }
-    .cta-buttons .button {
-        display: block;
-        margin: 10px auto;
-        width: 80%;
-        max-width: 300px;
-    }
+}
 
-    .expertise-grid, .metrics-grid, .case-study-grid, .testimonial-container, .footer-content {
-        grid-template-columns: 1fr; /* Stack elements */
-        gap: 20px;
-    }
+@media (max-width: 768px) { /* Tablet/Mobile breakpoint */
+  header {
+      position: relative; /* Remove sticky on small screens if needed */
+  }
+  header #branding, header nav {
+    float: none;
+    text-align: center;
+  }
+  header #branding {
+      margin-bottom: 15px;
+  }
+  header nav {
+      margin-top: 0;
+  }
+  header ul {
+      /* Consider implementing a hamburger menu here for real-world use */
+  }
+  header li {
+    display: inline-block; /* Keep inline for simple nav */
+    margin: 0 10px; /* Reduce spacing */
+  }
 
-    .container {
-        width: 95%;
-        padding: 0 15px;
-    }
+  #hero {
+      padding: 60px 0;
+      min-height: 300px;
+  }
+  #hero h1 {
+    font-size: 2.1em;
+  }
+  #hero .subheading {
+    font-size: 1.1em;
+  }
+  .cta-buttons .button {
+    /* Stack buttons on small screens */
+    display: block;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 320px;
+  }
 
-    main h2 {
-        font-size: 1.8em;
-    }
-
-     .footer-content {
-        text-align: center;
-    }
-    .footer-info, .footer-nav, .footer-social {
-         margin-bottom: 20px;
-    }
+  section {
+      padding: 40px 0; /* Reduce padding */
+  }
+  main h2 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+  }
+  .expertise-grid, .metrics-grid, .case-study-grid, .testimonial-container {
+    grid-template-columns: 1fr; /* Stack grid items */
+    gap: 25px;
+  }
+  .footer-content {
+    grid-template-columns: 1fr; /* Stack footer columns */
+    text-align: center; /* Center footer content */
+  }
+  .footer-info, .footer-nav, .footer-social {
+     margin-bottom: 25px;
+  }
 }

@@ -820,6 +820,77 @@ footer {
     transition-delay: calc(0.1s * var(--animation-order, 0));
 } */
 
+/* --- Core Services & Expertise - Interactive Card Styles --- */
+
+.expertise-item {
+  /* Add cursor pointer only if the whole item is clickable */
+  /* cursor: pointer; */ /* We'll handle click via JS on non-link areas */
+  position: relative; /* Needed if using absolute positioning for icons/details */
+  background: var(--background-light);
+  padding: 30px 25px;
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+  /* Add transition for height/margins if needed */
+  overflow: hidden; /* Important for max-height transition */
+}
+.expertise-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the hidden details */
+.expertise-details {
+  max-height: 0; /* Start collapsed */
+  opacity: 0; /* Start invisible */
+  overflow: hidden; /* Keep content hidden */
+  text-align: left; /* Align text left */
+  font-size: 0.95em; /* Slightly smaller text */
+  color: var(--text-medium);
+  margin-top: 0; /* Start with no top margin */
+  padding-top: 0; /* Start with no padding */
+  transition: max-height 0.5s ease-out, /* Smooth transition */
+              opacity 0.4s ease-out,
+              margin-top 0.5s ease-out,
+              padding-top 0.5s ease-out;
+}
+
+/* Styles when the item is expanded */
+.expertise-item.expanded .expertise-details {
+  max-height: 300px; /* Allow height (adjust as needed) */
+  opacity: 1; /* Fade in */
+  margin-top: 15px; /* Add space above details */
+  padding-top: 15px; /* Add padding */
+  border-top: 1px solid var(--border-light); /* Separator line */
+}
+
+.expertise-details p {
+    margin-bottom: 10px; /* Space below paragraph */
+}
+
+/* Optional: Style the 'Learn More' link inside details */
+.details-link {
+    display: inline-block; /* Make it blocky */
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-blue);
+    text-decoration: none;
+    margin-top: 5px;
+}
+.details-link:hover {
+    color: var(--accent-orange);
+    text-decoration: underline;
+}
+
+/* Make non-link area clickable */
+.expertise-item h3 {
+    /* Prevent clicks on H3 itself from triggering expansion if desired */
+    /* pointer-events: none; */ /* This might be too aggressive */
+}
+.expertise-item h3 a {
+    /* pointer-events: auto; */ /* Ensure link is always clickable */
+}
+
 @media (max-width: 480px) { /* Smaller mobile */
     body {
         font-size: 15px; /* Slightly smaller base font */

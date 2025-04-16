@@ -6,20 +6,20 @@
 :root {
   /* Color Palette */
   --primary-blue: #014f86;         /* Trustworthy, strong blue */
-  --dark-blue: #013a63;          /* Dark blue for contrast and footer */
+  --dark-blue: #013a63;            /* Dark blue for contrast and footer */
   --accent-orange: #e8491d;        /* High-visibility call-to-action */
-  --light-blue-accent: #a9d6e5;   /* Subtle highlight blue */
+  --light-blue-accent: #a9d6e5;      /* Subtle highlight blue */
 
   /* Text Colors */
-  --text-dark: #333333;           /* Primary text color */
-  --text-medium: #555555;        /* Secondary text color */
-  --text-light: #ffffff;         /* Text on dark backgrounds */
-  --text-on-alt-bg: #e0e0e0;     /* Text for light accents on dark */
+  --text-dark: #333333;            /* Primary text color */
+  --text-medium: #555555;          /* Secondary text color */
+  --text-light: #ffffff;           /* Text on dark backgrounds */
+  --text-on-alt-bg: #e0e0e0;        /* Text for light accents on dark */
 
   /* Backgrounds and Borders */
-  --background-light: #ffffff;   /* Main background */
-  --background-alt: #f8f9fa;     /* Alternative section background */
-  --border-light: #e0e0e0;       /* Light borders for subtle accents */
+  --background-light: #ffffff;     /* Main background */
+  --background-alt: #f8f9fa;        /* Alternative section background */
+  --border-light: #e0e0e0;          /* Light borders for subtle accents */
 
   /* Typography */
   --font-stack: "Avenir Book", "Avenir Next", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -32,7 +32,7 @@
   --container-max-width: 1200px;
   --border-radius-small: 5px;
   --border-radius-medium: 8px;
-  --border-radius-large: 25px;     /* For rounded buttons */
+  --border-radius-large: 25px;      /* For rounded buttons */
 
   /* Transitions */
   --transition-speed: 0.3s;
@@ -70,9 +70,9 @@ body {
 }
 
 img {
-    max-width: 100%; /* Responsive images by default */
-    height: auto;
-    display: block; /* Remove bottom space */
+  max-width: 100%; /* Responsive images by default */
+  height: auto;
+  display: block;  /* Remove bottom space */
 }
 
 /* --- Header --- */
@@ -83,8 +83,8 @@ header {
   border-bottom: 1px solid var(--border-light);
   position: sticky;
   top: 0;
-  left: 0; /* Ensure it spans full width when sticky */
-  right: 0; /* Ensure it spans full width when sticky */
+  left: 0;
+  right: 0;
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
@@ -167,7 +167,7 @@ main h1, main h2, main h3 {
 
 main h2 {
   font-size: 2.2em;
-  margin-top: 0; /* Remove default top margin */
+  margin-top: 0;
   margin-bottom: 40px;
   color: var(--dark-blue);
   text-align: center;
@@ -176,7 +176,7 @@ main h2 {
 
 main h3 {
   font-size: 1.4em;
-  margin-top: 0; /* Remove default top margin */
+  margin-top: 0;
   margin-bottom: 15px;
   color: var(--primary-blue);
   line-height: 1.4;
@@ -197,14 +197,14 @@ main h3 {
   transition: background-color var(--transition-speed) ease,
               transform var(--transition-speed) ease,
               box-shadow var(--transition-speed) ease,
-              border-color var(--transition-speed) ease, /* Add border transition */
-              color var(--transition-speed) ease; /* Add color transition */
+              border-color var(--transition-speed) ease,
+              color var(--transition-speed) ease;
   border: 2px solid transparent;
   display: inline-block;
-  text-decoration: none; /* Ensure buttons aren't underlined */
+  text-decoration: none;
   cursor: pointer;
   text-align: center;
-  line-height: normal; /* Ensure consistent line height */
+  line-height: normal;
 }
 
 .button:hover {
@@ -218,28 +218,21 @@ main h3 {
   border-color: var(--accent-orange);
 }
 .button-primary:hover {
-  background: #c4340a; /* Darken orange */
+  background: #c4340a;
   border-color: #c4340a;
   color: var(--text-light);
 }
 
 .button-secondary {
   background: transparent;
-  color: var(--text-light); /* Default for hero */
-  border-color: var(--text-light); /* Default for hero */
+  color: var(--text-light);
+  border-color: var(--text-light);
 }
-/* Secondary button styles outside hero */
 section .button-secondary {
-  background: var(--text-medium); /* Grey secondary button */
+  background: var(--text-medium);
   color: var(--text-light);
   border-color: var(--text-medium);
 }
-section .button-secondary:hover {
-  background: var(--text-dark);
-  border-color: var(--text-dark);
-  color: var(--text-light);
-}
-/* Hero specific hover for secondary */
 #hero .button-secondary:hover {
   background: var(--text-light);
   color: var(--primary-blue);
@@ -249,16 +242,16 @@ section .button-secondary:hover {
 /* --- 1. Hero Section --- */
 #hero {
   /* background: linear-gradient(rgba(1, 79, 134, 0.8), rgba(1, 79, 134, 0.8)), url('hero-background.jpg') no-repeat center center/cover; */
-  background-color: var(--primary-blue); /* Solid blue fallback */
+  background-color: var(--primary-blue);
   color: var(--text-light);
-  padding: 100px 20px; /* Add horizontal padding */
+  padding: 100px 20px;
   text-align: center;
   min-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Prevent content spill */
+  overflow: hidden;
 }
 
 #hero h1 {
@@ -303,19 +296,61 @@ section .button-secondary:hover {
   margin-top: 40px;
 }
 
+/* Original expertise-item styling is now enhanced for a flip card effect */
 .expertise-item {
+  position: relative;
+  perspective: 1000px; /* Enable 3D perspective */
+  border-radius: var(--border-radius-medium);
+  /* Preserve existing background, padding and box-shadow for fallback/non-interactive states */
   background: var(--background-light);
   padding: 30px 25px;
-  border-radius: var(--border-radius-medium);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  transition: transform var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  overflow: hidden;
 }
 .expertise-item:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* --- Flip Card Inner Structure --- */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+.expertise-item.expanded .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: inherit;
+  background: var(--background-light);
+  padding: 30px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Front face (default visible) */
+.card-front {
+  z-index: 2;
+}
+
+/* Back face (revealed on flip) */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Icon and Title on Front Face */
 .expertise-item .icon-placeholder {
   font-size: 3em;
   display: block;
@@ -334,20 +369,37 @@ section .button-secondary:hover {
   color: inherit;
   transition: color var(--transition-speed) ease;
 }
-/* Ensure link covers the whole item potentially */
-.expertise-item h3 a::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0; /* Cover area */
-}
 .expertise-item h3 a:hover {
   color: var(--accent-orange);
 }
-.expertise-item h3 a:focus { /* Add focus style for accessibility */
-    outline: 2px solid var(--primary-blue);
-    outline-offset: 2px;
+.expertise-item h3 a:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
 }
 
+/* Details on Back Face */
+.expertise-details {
+  font-size: 0.95em;
+  color: var(--text-medium);
+  line-height: 1.5;
+}
+.expertise-details p {
+  margin-bottom: 10px;
+}
+
+/* 'Learn More' Link */
+.details-link {
+  display: inline-block;
+  font-weight: var(--font-weight-semibold);
+  color: var(--primary-blue);
+  text-decoration: none;
+  margin-top: 10px;
+  transition: color var(--transition-speed) ease;
+}
+.details-link:hover {
+  color: var(--accent-orange);
+  text-decoration: underline;
+}
 
 /* --- 4. Key Differentiators --- */
 #differentiators {
@@ -374,14 +426,12 @@ section .button-secondary:hover {
   transform: translateX(5px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
-
 .differentiator-list li strong {
   color: var(--dark-blue);
   display: block;
   margin-bottom: 5px;
   font-weight: var(--font-weight-semibold);
 }
-
 
 /* --- 5. Impact Metrics --- */
 #impact-metrics {
@@ -399,7 +449,6 @@ section .button-secondary:hover {
   gap: 30px 20px;
   text-align: center;
 }
-
 .metric-number {
   display: block;
   font-size: 3.2em;
@@ -408,7 +457,6 @@ section .button-secondary:hover {
   line-height: 1.1;
   margin-bottom: 5px;
 }
-
 .metric-label {
   display: block;
   font-size: 1em;
@@ -420,7 +468,6 @@ section .button-secondary:hover {
 #testimonials {
   background-color: var(--background-alt);
 }
-
 .testimonial-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -428,7 +475,6 @@ section .button-secondary:hover {
   max-width: 1100px;
   margin: 0 auto;
 }
-
 .testimonial {
   background: var(--background-light);
   border-left: 5px solid var(--accent-orange);
@@ -436,35 +482,32 @@ section .button-secondary:hover {
   border-radius: var(--border-radius-small);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
   font-style: italic;
-  position: relative; /* For quote positioning */
+  position: relative;
 }
-
 .testimonial p {
   margin-bottom: 20px;
   font-size: 1.1em;
   color: var(--text-medium);
   line-height: 1.6;
-  position: relative; /* For quote positioning */
-  padding-left: 15px; /* Space for quote mark */
+  position: relative;
+  padding-left: 15px;
 }
-
 .testimonial p::before {
   content: '“';
-  font-size: 3em; /* Larger quote */
-  line-height: 0; /* Prevent line height impact */
+  font-size: 3em;
+  line-height: 0;
   color: var(--accent-orange);
-  opacity: 0.5; /* Subtler quote mark */
-  position: absolute; /* Position precisely */
+  opacity: 0.5;
+  position: absolute;
   left: -5px;
   top: 15px;
 }
-
 .testimonial footer {
   font-style: normal;
   font-weight: var(--font-weight-semibold);
   color: var(--text-dark);
   text-align: right;
-  margin-top: 10px; /* Ensure space */
+  margin-top: 10px;
 }
 .testimonial footer::before {
   content: "— ";
@@ -474,20 +517,17 @@ section .button-secondary:hover {
 #case-studies h2 {
   margin-bottom: 50px;
 }
-
 .case-study-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
   gap: 35px;
 }
-
 .case-study {
   background: var(--background-light);
   border-radius: var(--border-radius-medium);
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: transform var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
   display: flex;
   flex-direction: column;
 }
@@ -495,41 +535,35 @@ section .button-secondary:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
-
 .case-study img {
   width: 100%;
   height: 220px;
-  object-fit: cover; /* Ensure image covers area well */
+  object-fit: cover;
 }
-
 .case-study-content {
   padding: 25px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
-
 .case-study-content h3 {
   font-size: 1.4em;
   color: var(--primary-blue);
-  margin: 0 0 10px 0; /* Adjusted margins */
+  margin: 0 0 10px 0;
 }
-
 .case-study-content p {
   font-size: 1em;
   color: var(--text-medium);
   line-height: 1.6;
-  flex-grow: 1; /* Push button down */
+  flex-grow: 1;
   margin-bottom: 20px;
 }
-
 .case-study .button {
-  margin-top: auto; /* Push to bottom */
-  align-self: flex-start; /* Align left */
+  margin-top: auto;
+  align-self: flex-start;
   padding: 10px 25px;
   border-radius: var(--border-radius-small);
   font-weight: var(--font-weight-semibold);
-  /* Use secondary style by default */
   background: var(--text-medium);
   color: var(--text-light);
   border-color: var(--text-medium);
@@ -540,12 +574,10 @@ section .button-secondary:hover {
   color: var(--text-light);
 }
 
-
 /* --- 8. Insights & Resources --- */
 #resources {
   background-color: var(--background-alt);
 }
-
 .resource-list {
   list-style: none;
   padding: 0;
@@ -553,12 +585,10 @@ section .button-secondary:hover {
   margin: 30px auto 0 auto;
   text-align: center;
 }
-
 .resource-list li {
   margin-bottom: 15px;
   font-size: 1.1em;
 }
-
 .resource-list a {
   text-decoration: none;
   color: var(--primary-blue);
@@ -566,9 +596,8 @@ section .button-secondary:hover {
   transition: color var(--transition-speed) ease;
   position: relative;
   padding-bottom: 3px;
-  display: inline-block; /* Needed for pseudo-element positioning */
+  display: inline-block;
 }
-
 .resource-list a::after {
   content: '';
   position: absolute;
@@ -580,51 +609,40 @@ section .button-secondary:hover {
   background-color: var(--accent-orange);
   transition: width var(--transition-speed) ease;
 }
-
 .resource-list a:hover {
   color: var(--accent-orange);
 }
 .resource-list a:hover::after {
   width: 100%;
 }
-.resource-list a:focus { /* Accessibility focus style */
-    outline: 2px solid var(--primary-blue);
-    outline-offset: 3px;
-    border-radius: 2px;
+.resource-list a:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* --- 9. Bottom Call-to-Action --- */
 #bottom-cta {
   background: var(--primary-blue);
   color: var(--text-light);
-  padding: 60px 20px; /* Add horizontal padding */
+  padding: 60px 20px;
   text-align: center;
 }
-
 #bottom-cta h2 {
   color: var(--text-light);
   margin-top: 0;
   margin-bottom: 15px;
 }
-
 #bottom-cta p {
   font-size: 1.2em;
   margin: 0 auto 30px auto;
   max-width: 700px;
   opacity: 0.9;
 }
-
-#bottom-cta .button-primary {
-  /* Styles defined globally */
-}
 #bottom-cta .button-primary:hover {
   background: var(--text-light);
   color: var(--accent-orange);
   border-color: var(--text-light);
-}
-
-#bottom-cta .button-secondary {
-  /* Styles defined globally */
 }
 #bottom-cta .button-secondary:hover {
   background: var(--text-light);
@@ -636,18 +654,16 @@ section .button-secondary:hover {
 footer {
   background-color: var(--dark-blue);
   color: var(--text-on-alt-bg);
-  padding: 50px 0 20px 0; /* More top padding */
+  padding: 50px 0 20px 0;
   font-size: 0.9em;
 }
-
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjust min width */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 30px 40px;
-  margin-bottom: 40px; /* More space before bottom */
+  margin-bottom: 40px;
   text-align: left;
 }
-
 .footer-info p,
 .footer-nav p,
 .footer-social p {
@@ -657,7 +673,6 @@ footer {
   color: var(--text-light);
   font-size: 1.1em;
 }
-
 .footer-info a,
 .footer-nav a,
 .footer-social a {
@@ -671,48 +686,41 @@ footer {
   color: var(--text-light);
   text-decoration: underline;
 }
-
 .footer-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
 .footer-nav li {
   margin-bottom: 10px;
 }
-
 .footer-social a {
   margin-right: 15px;
   display: inline-block;
-  opacity: 0.8; /* Slightly muted social icons */
+  opacity: 0.8;
   transition: opacity var(--transition-speed) ease;
 }
 .footer-social a:hover {
-    opacity: 1.0;
-    text-decoration: none; /* Remove underline */
+  opacity: 1.0;
+  text-decoration: none;
 }
 .footer-social a:last-child {
   margin-right: 0;
 }
-/* Add placeholders for social icons if using Font Awesome later */
-.footer-social a i { /* Example if using Font Awesome: <a href="#"><i class="fab fa-linkedin"></i></a> */
-    font-size: 1.4em; /* Adjust icon size */
+.footer-social a i {
+  font-size: 1.4em;
 }
-
-
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid var(--primary-blue); /* Use primary blue separator */
+  border-top: 1px solid var(--primary-blue);
   font-size: 0.9em;
   color: #ccc;
 }
 
-
 /* --- Responsive Adjustments --- */
-@media (max-width: 992px) { /* Tablet */
+@media (max-width: 992px) {
   .container {
     width: 92%;
   }
@@ -726,14 +734,14 @@ footer {
     font-size: 1.2em;
   }
   header li {
-      margin-left: 20px; /* Reduce nav spacing */
+    margin-left: 20px;
   }
 }
 
-@media (max-width: 768px) { /* Mobile */
+@media (max-width: 768px) {
   header {
-    position: relative; /* Remove sticky */
-    padding: 10px 0; /* Reduce header padding */
+    position: relative;
+    padding: 10px 0;
   }
   header #branding,
   header nav {
@@ -747,16 +755,15 @@ footer {
     margin-top: 0;
   }
   header ul {
-      line-height: 1.5; /* Ensure spacing if items wrap */
+    line-height: 1.5;
   }
   header li {
-    display: inline-block; /* Keep inline unless using hamburger */
-    margin: 5px 10px; /* Adjust spacing for wrapping */
+    display: inline-block;
+    margin: 5px 10px;
   }
-
   #hero {
     padding: 60px 20px;
-    min-height: 350px; /* Adjust height */
+    min-height: 350px;
   }
   #hero h1 {
     font-size: 2.1em;
@@ -770,7 +777,6 @@ footer {
     width: 80%;
     max-width: 320px;
   }
-
   section {
     padding: 40px 0;
   }
@@ -778,19 +784,17 @@ footer {
     font-size: 1.8em;
     margin-bottom: 30px;
   }
-
   .expertise-grid,
   .metrics-grid,
   .case-study-grid,
   .testimonial-container {
-    grid-template-columns: 1fr; /* Stack all grids */
+    grid-template-columns: 1fr;
     gap: 25px;
   }
-
   .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 20px; /* Reduce gap */
+    gap: 20px;
   }
   .footer-info,
   .footer-nav,
@@ -798,136 +802,21 @@ footer {
     margin-bottom: 20px;
   }
   .footer-social a {
-      margin: 0 8px; /* Adjust social icon spacing */
+    margin: 0 8px;
   }
 }
 
 /* --- Scroll Animation Styles --- */
 .animate-on-scroll {
-  opacity: 0; /* Start hidden */
-  transform: translateY(30px); /* Start slightly lower */
+  opacity: 0;
+  transform: translateY(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-
 .animate-on-scroll.is-visible {
-  opacity: 1; /* Fade in */
-  transform: translateY(0); /* Slide up to original position */
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Optional: Stagger animation for grid items */
-/* This requires JS adjustment to add delay based on item index */
-/* .expertise-item, .case-study {
-    transition-delay: calc(0.1s * var(--animation-order, 0));
-} */
-
-/* --- Core Services & Expertise - Interactive Card Styles --- */
-
-.expertise-item {
-  /* Add cursor pointer only if the whole item is clickable */
-  /* cursor: pointer; */ /* We'll handle click via JS on non-link areas */
-  position: relative; /* Needed if using absolute positioning for icons/details */
-  background: var(--background-light);
-  padding: 30px 25px;
-  border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  transition: transform var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
-  /* Add transition for height/margins if needed */
-  overflow: hidden; /* Important for max-height transition */
-}
-.expertise-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for the hidden details */
-.expertise-details {
-  max-height: 0; /* Start collapsed */
-  opacity: 0; /* Start invisible */
-  overflow: hidden; /* Keep content hidden */
-  text-align: left; /* Align text left */
-  font-size: 0.95em; /* Slightly smaller text */
-  color: var(--text-medium);
-  margin-top: 0; /* Start with no top margin */
-  padding-top: 0; /* Start with no padding */
-  transition: max-height 0.5s ease-out, /* Smooth transition */
-              opacity 0.4s ease-out,
-              margin-top 0.5s ease-out,
-              padding-top 0.5s ease-out;
-}
-
-/* Styles when the item is expanded */
-.expertise-item.expanded .expertise-details {
-  max-height: 300px; /* Allow height (adjust as needed) */
-  opacity: 1; /* Fade in */
-  margin-top: 15px; /* Add space above details */
-  padding-top: 15px; /* Add padding */
-  border-top: 1px solid var(--border-light); /* Separator line */
-}
-
-.expertise-details p {
-    margin-bottom: 10px; /* Space below paragraph */
-}
-
-/* Optional: Style the 'Learn More' link inside details */
-.details-link {
-    display: inline-block; /* Make it blocky */
-    font-weight: var(--font-weight-semibold);
-    color: var(--primary-blue);
-    text-decoration: none;
-    margin-top: 5px;
-}
-.details-link:hover {
-    color: var(--accent-orange);
-    text-decoration: underline;
-}
-
-/* Make non-link area clickable */
-.expertise-item h3 {
-    /* Prevent clicks on H3 itself from triggering expansion if desired */
-    /* pointer-events: none; */ /* This might be too aggressive */
-}
-.expertise-item h3 a {
-    /* pointer-events: auto; */ /* Ensure link is always clickable */
-}
-
-@media (max-width: 480px) { /* Smaller mobile */
-    body {
-        font-size: 15px; /* Slightly smaller base font */
-    }
-    .container {
-        width: 95%;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    header #branding h1 a {
-        font-size: 22px; /* Smaller logo text */
-    }
-    header li {
-        margin: 3px 8px;
-    }
-    main h2 {
-        font-size: 1.6em;
-    }
-    main h3 {
-        font-size: 1.2em;
-    }
-    #hero h1 {
-        font-size: 1.9em;
-    }
-    #hero .subheading {
-        font-size: 1em;
-    }
-    .metric-number {
-        font-size: 2.8em;
-    }
-    .testimonial p {
-        font-size: 1em;
-    }
-    .case-study img {
-        height: 180px; /* Smaller image */
-    }
-    .footer-content {
-        gap: 15px;
-    }
-}
+/* ==========================================================================
+   End of CSS
+   ========================================================================== */

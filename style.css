@@ -303,7 +303,7 @@ section .button-secondary {
   border-radius: var(--border-radius-medium);
   /* Preserve existing background, padding and box-shadow for fallback/non-interactive states */
   background: var(--background-light);
-  padding: 30px 25px;
+  padding: 300px 250px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
   overflow: hidden;

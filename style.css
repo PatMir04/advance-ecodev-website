@@ -1,25 +1,26 @@
 /* ==========================================================================
-   CSS for Advance EcoDev Solutions Website - Blue Theme (v2025-04-15)
+   CSS for Advance EcoDev Solutions Website - Blue Theme (v2025-04-17)
+   Includes Card Flip for Expertise Items
    ========================================================================== */
 
 /* --- Theme Configuration: CSS Variables --- */
 :root {
   /* Color Palette */
   --primary-blue: #014f86;         /* Trustworthy, strong blue */
-  --dark-blue: #013a63;            /* Dark blue for contrast and footer */
+  --dark-blue: #013a63;          /* Dark blue for contrast and footer */
   --accent-orange: #e8491d;        /* High-visibility call-to-action */
-  --light-blue-accent: #a9d6e5;      /* Subtle highlight blue */
+  --light-blue-accent: #a9d6e5;   /* Subtle highlight blue */
 
   /* Text Colors */
-  --text-dark: #333333;            /* Primary text color */
-  --text-medium: #555555;          /* Secondary text color */
-  --text-light: #ffffff;           /* Text on dark backgrounds */
-  --text-on-alt-bg: #e0e0e0;        /* Text for light accents on dark */
+  --text-dark: #333333;           /* Primary text color */
+  --text-medium: #555555;        /* Secondary text color */
+  --text-light: #ffffff;         /* Text on dark backgrounds */
+  --text-on-alt-bg: #e0e0e0;     /* Text for light accents on dark */
 
   /* Backgrounds and Borders */
-  --background-light: #ffffff;     /* Main background */
-  --background-alt: #f8f9fa;        /* Alternative section background */
-  --border-light: #e0e0e0;          /* Light borders for subtle accents */
+  --background-light: #ffffff;   /* Main background */
+  --background-alt: #f8f9fa;     /* Alternative section background */
+  --border-light: #e0e0e0;       /* Light borders for subtle accents */
 
   /* Typography */
   --font-stack: "Avenir Book", "Avenir Next", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -32,10 +33,12 @@
   --container-max-width: 1200px;
   --border-radius-small: 5px;
   --border-radius-medium: 8px;
-  --border-radius-large: 25px;      /* For rounded buttons */
+  --border-radius-large: 25px;     /* For rounded buttons */
 
-  /* Transitions */
+  /* Transitions & Animations */
   --transition-speed: 0.3s;
+  --flip-speed: 0.6s;
+  --scroll-animation-speed: 0.6s;
 }
 
 /* --- Global Reset & Base Styles --- */
@@ -70,9 +73,9 @@ body {
 }
 
 img {
-  max-width: 100%; /* Responsive images by default */
-  height: auto;
-  display: block;  /* Remove bottom space */
+    max-width: 100%; /* Responsive images by default */
+    height: auto;
+    display: block; /* Remove bottom space */
 }
 
 /* --- Header --- */
@@ -100,12 +103,12 @@ header a {
 
 header #branding {
   float: left;
-  padding-top: 2px; /* Adjust as needed for vertical alignment */
+  padding-top: 2px;
 }
 
 header #branding h1 {
   margin: 0;
-  line-height: 1; /* Prevent extra space */
+  line-height: 1;
 }
 
 header #branding h1 a {
@@ -121,7 +124,7 @@ header #branding h1 .highlight {
 
 header nav {
   float: right;
-  margin-top: 5px; /* Align nav items roughly with branding baseline */
+  margin-top: 5px;
 }
 
 header ul {
@@ -132,7 +135,7 @@ header ul {
 
 header li {
   display: inline-block;
-  margin-left: 25px; /* Space between nav items */
+  margin-left: 25px;
 }
 header li:first-child {
   margin-left: 0;
@@ -143,8 +146,7 @@ header a:hover {
   color: var(--accent-orange);
 }
 
-/* Clearfix for floated header elements */
-header .container::after {
+header .container::after { /* Clearfix */
   content: "";
   display: table;
   clear: both;
@@ -228,12 +230,17 @@ main h3 {
   color: var(--text-light);
   border-color: var(--text-light);
 }
-section .button-secondary {
+section .button-secondary { /* Secondary outside hero */
   background: var(--text-medium);
   color: var(--text-light);
   border-color: var(--text-medium);
 }
-#hero .button-secondary:hover {
+section .button-secondary:hover {
+  background: var(--text-dark);
+  border-color: var(--text-dark);
+  color: var(--text-light);
+}
+#hero .button-secondary:hover { /* Hero secondary hover */
   background: var(--text-light);
   color: var(--primary-blue);
   border-color: var(--text-light);
@@ -241,7 +248,6 @@ section .button-secondary {
 
 /* --- 1. Hero Section --- */
 #hero {
-  /* background: linear-gradient(rgba(1, 79, 134, 0.8), rgba(1, 79, 134, 0.8)), url('hero-background.jpg') no-repeat center center/cover; */
   background-color: var(--primary-blue);
   color: var(--text-light);
   padding: 100px 20px;
@@ -272,12 +278,15 @@ section .button-secondary {
   font-weight: var(--font-weight-book);
   opacity: 0.9;
 }
+#hero .subheading strong { /* Style emphasized text */
+    font-weight: var(--font-weight-semibold);
+}
+
 
 /* --- 2. Intro Section --- */
 #intro h2 {
   margin-bottom: 20px;
 }
-
 #intro p {
   max-width: 800px;
   margin-left: auto;
@@ -286,133 +295,145 @@ section .button-secondary {
   color: var(--text-medium);
   text-align: center;
 }
+#intro p strong { /* Style emphasized text */
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-blue);
+}
 
 /* --- 3. Core Services & Expertise --- */
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  text-align: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted minmax */
+  gap: 35px; /* Increased gap */
   margin-top: 40px;
 }
 
-/* Original expertise-item styling is now enhanced for a flip card effect */
-.expertise-item {
+/* Card Flip Styles for Expertise Items */
+/* Container for each item */
+.expertise-item.card {
+  perspective: 1500px; /* Increase perspective for more depth */
   position: relative;
-  perspective: 1000px; /* Enable 3D perspective */
+  min-height: 240px;  /* <<< ADJUST THIS AS NEEDED for back content */
   border-radius: var(--border-radius-medium);
-  /* Preserve existing background, padding and box-shadow for fallback/non-interactive states */
-  background: var(--background-light);
-  padding: 300px 250px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-  overflow: hidden;
+  background: transparent; /* Container is transparent, faces have background */
+  box-shadow: none; /* Remove shadow from container, apply to faces */
+  transition: transform var(--transition-speed) ease; /* Only transition transform for hover */
+  overflow: visible;
+  cursor: pointer; /* Indicate the whole item is interactive */
 }
-.expertise-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+.expertise-item.card:hover {
+  transform: translateY(-6px); /* Keep hover lift */
 }
 
-/* --- Flip Card Inner Structure --- */
+/* Inner element that flips */
 .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s ease;
+  min-height: inherit;
+  transition: transform var(--flip-speed) ease;
   transform-style: preserve-3d;
 }
+
+/* Apply flip transform when .expanded class is added by JS */
 .expertise-item.expanded .card-inner {
   transform: rotateY(180deg);
 }
 
+/* Front and Back faces */
 .card-front,
 .card-back {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: inherit;
+  border-radius: var(--border-radius-medium);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Apply shadow to faces */
   background: var(--background-light);
-  padding: 30px 25px;
+  padding: 25px; /* Adjust padding */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-/* Front face (default visible) */
 .card-front {
-  z-index: 2;
+  z-index: 2; /* Front is initially visible */
 }
-
-/* Back face (revealed on flip) */
-.card-back {
-  transform: rotateY(180deg);
-}
-
-/* Icon and Title on Front Face */
-.expertise-item .icon-placeholder {
-  font-size: 3em;
-  display: block;
-  margin-bottom: 20px;
+.card-front .icon-placeholder {
+  font-size: 2.8em; /* Adjust icon size */
+  margin-bottom: 15px;
   color: var(--primary-blue);
 }
-
-.expertise-item h3 {
-  font-size: 1.2em;
-  margin: 0;
+.card-front h3 {
+  font-size: 1.15em; /* Adjust heading size */
   color: var(--dark-blue);
+  margin: 0;
 }
-
-.expertise-item h3 a {
+.card-front h3 a { /* Style link on front */
   text-decoration: none;
   color: inherit;
   transition: color var(--transition-speed) ease;
 }
-.expertise-item h3 a:hover {
+.card-front h3 a:hover {
   color: var(--accent-orange);
 }
-.expertise-item h3 a:focus {
+.card-front h3 a::after { /* Make link cover area if desired (careful with click target) */
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1; /* Behind text */
+}
+.card-front h3 a:focus {
   outline: 2px solid var(--primary-blue);
   outline-offset: 2px;
 }
 
-/* Details on Back Face */
-.expertise-details {
-  font-size: 0.95em;
-  color: var(--text-medium);
-  line-height: 1.5;
+.card-back {
+  transform: rotateY(180deg); /* Initially hidden */
+  justify-content: flex-start; /* Align content top */
+  align-items: flex-start; /* Align content left */
+  text-align: left;
+  overflow-y: auto; /* Allow scroll if content overflows */
+  padding: 20px; /* Slightly different padding for back */
+}
+.expertise-details { /* Wrapper for content on back */
+  width: 100%;
 }
 .expertise-details p {
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
+  font-size: 0.9em; /* Smaller text on back */
+  line-height: 1.6;
+  color: var(--text-medium);
 }
-
-/* 'Learn More' Link */
 .details-link {
   display: inline-block;
+  margin-top: 8px;
   font-weight: var(--font-weight-semibold);
   color: var(--primary-blue);
   text-decoration: none;
-  margin-top: 10px;
-  transition: color var(--transition-speed) ease;
+  font-size: 0.9em;
 }
 .details-link:hover {
   color: var(--accent-orange);
   text-decoration: underline;
 }
 
+
 /* --- 4. Key Differentiators --- */
 #differentiators {
   background-color: var(--background-alt);
 }
-
 .differentiator-list {
   list-style: none;
   padding: 0;
   max-width: 850px;
   margin: 30px auto 0 auto;
 }
-
 .differentiator-list li {
   background: var(--background-light);
   margin-bottom: 15px;
@@ -525,9 +546,10 @@ section .button-secondary {
 .case-study {
   background: var(--background-light);
   border-radius: var(--border-radius-medium);
-  overflow: hidden;
+  overflow: hidden; /* Keep image contained */
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
   display: flex;
   flex-direction: column;
 }
@@ -564,6 +586,7 @@ section .button-secondary {
   padding: 10px 25px;
   border-radius: var(--border-radius-small);
   font-weight: var(--font-weight-semibold);
+  /* Apply secondary styles */
   background: var(--text-medium);
   color: var(--text-light);
   border-color: var(--text-medium);
@@ -616,9 +639,9 @@ section .button-secondary {
   width: 100%;
 }
 .resource-list a:focus {
-  outline: 2px solid var(--primary-blue);
-  outline-offset: 3px;
-  border-radius: 2px;
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
 /* --- 9. Bottom Call-to-Action --- */
@@ -642,11 +665,6 @@ section .button-secondary {
 #bottom-cta .button-primary:hover {
   background: var(--text-light);
   color: var(--accent-orange);
-  border-color: var(--text-light);
-}
-#bottom-cta .button-secondary:hover {
-  background: var(--text-light);
-  color: var(--primary-blue);
   border-color: var(--text-light);
 }
 
@@ -701,14 +719,14 @@ footer {
   transition: opacity var(--transition-speed) ease;
 }
 .footer-social a:hover {
-  opacity: 1.0;
-  text-decoration: none;
+    opacity: 1.0;
+    text-decoration: none;
 }
 .footer-social a:last-child {
   margin-right: 0;
 }
-.footer-social a i {
-  font-size: 1.4em;
+.footer-social a i { /* Example for Font Awesome */
+    font-size: 1.4em;
 }
 .footer-bottom {
   text-align: center;
@@ -719,8 +737,9 @@ footer {
   color: #ccc;
 }
 
+
 /* --- Responsive Adjustments --- */
-@media (max-width: 992px) {
+@media (max-width: 992px) { /* Tablet */
   .container {
     width: 92%;
   }
@@ -734,11 +753,14 @@ footer {
     font-size: 1.2em;
   }
   header li {
-    margin-left: 20px;
+      margin-left: 20px;
+  }
+  .expertise-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust grid for tablet */
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Mobile */
   header {
     position: relative;
     padding: 10px 0;
@@ -755,12 +777,13 @@ footer {
     margin-top: 0;
   }
   header ul {
-    line-height: 1.5;
+      line-height: 1.5;
   }
   header li {
     display: inline-block;
     margin: 5px 10px;
   }
+
   #hero {
     padding: 60px 20px;
     min-height: 350px;
@@ -777,6 +800,7 @@ footer {
     width: 80%;
     max-width: 320px;
   }
+
   section {
     padding: 40px 0;
   }
@@ -784,13 +808,15 @@ footer {
     font-size: 1.8em;
     margin-bottom: 30px;
   }
+
   .expertise-grid,
   .metrics-grid,
   .case-study-grid,
   .testimonial-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack all grids */
     gap: 25px;
   }
+
   .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
@@ -802,21 +828,76 @@ footer {
     margin-bottom: 20px;
   }
   .footer-social a {
-    margin: 0 8px;
+      margin: 0 8px;
   }
 }
 
-/* --- Scroll Animation Styles --- */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+@media (max-width: 480px) { /* Smaller mobile */
+    body {
+        font-size: 15px;
+    }
+    .container {
+        width: 95%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    header #branding h1 a {
+        font-size: 22px;
+    }
+    header li {
+        margin: 3px 8px;
+    }
+    main h2 {
+        font-size: 1.6em;
+    }
+    main h3 {
+        font-size: 1.2em;
+    }
+    #hero h1 {
+        font-size: 1.9em;
+    }
+    #hero .subheading {
+        font-size: 1em;
+    }
+    .metric-number {
+        font-size: 2.8em;
+    }
+    .testimonial p {
+        font-size: 1em;
+    }
+    .case-study img {
+        height: 180px;
+    }
+    .footer-content {
+        gap: 15px;
+    }
+    /* Adjust card height for small screens if needed */
+    .expertise-item.card {
+        min-height: 220px; /* Possibly reduce min-height */
+    }
+    .card-front, .card-back {
+        padding: 20px; /* Reduce padding */
+    }
+     .card-front .icon-placeholder {
+        font-size: 2.5em;
+     }
+     .card-front h3 {
+        font-size: 1.1em;
+     }
+     .expertise-details p {
+        font-size: 0.85em;
+     }
 }
 
-/* ==========================================================================
-   End of CSS
-   ========================================================================== */
+
+/* --- Scroll Animation Styles --- */
+.animate-on-scroll {
+  opacity: 0; /* Start hidden */
+  transform: translateY(30px); /* Start slightly lower */
+  transition: opacity var(--scroll-animation-speed) ease-out, transform var(--scroll-animation-speed) ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide up to original position */
+}

@@ -5,28 +5,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Selects elements with 'animate-on-scroll' class and adds 'is-visible'
     // when they enter the viewport, triggering CSS transitions.
     // ==========================================================
-    const observerOptions = {
+    const scrollObserverOptions = {
         root: null, // relative to document viewport
         rootMargin: '0px',
         threshold: 0.1 // trigger when 10% of the element is visible
     };
 
-    const observerCallback = (entries, observer) => {
+    const scrollObserverCallback = (entries, observer) => {
         entries.forEach(entry => {
-            // When element comes into view
             if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible'); // Add class to trigger animation
-                observer.unobserve(entry.target); // Stop watching this element once animated
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Stop observing once visible
             }
         });
     };
 
-    // Create the observer
-    const scrollObserver = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Find all elements to animate
+    const scrollObserver = new IntersectionObserver(scrollObserverCallback, scrollObserverOptions);
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-    // Observe each element
     elementsToAnimate.forEach(el => scrollObserver.observe(el));
 
 
@@ -35,131 +30,172 @@ document.addEventListener('DOMContentLoaded', function() {
     // them up from 0 to their 'data-target' value when the section is visible.
     // =============================================================
     const metricsSection = document.getElementById('impact-metrics');
-    let counterAnimated = false; // Flag to ensure animation runs only once per page load
+    let counterAnimated = false; // Flag to ensure animation runs only once
 
-    // Options for observing the metrics section
-    const counterObserverOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.4 // Trigger when 40% of the section is visible for better timing
-    };
+    if (metricsSection) { // Only proceed if the metrics section exists
+        const counterObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.4 // Trigger when 40% of the section is visible
+        };
 
-    // Callback function for the counter observer
-    const counterObserverCallback = (entries, observer) => {
-        entries.forEach(entry => {
-            // Check if the metrics section is in view and animation hasn't run yet
-            if (entry.isIntersecting && !counterAnimated) {
-                counterAnimated = true; // Mark animation as started
-                const counters = metricsSection.querySelectorAll('.metric-number');
+        const counterObserverCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterAnimated) {
+                    counterAnimated = true;
+                    const counters = metricsSection.querySelectorAll('.metric-number');
 
-                counters.forEach(counter => {
-                    counter.innerText = '0'; // Start display at 0
-                    const target = +counter.getAttribute('data-target'); // Get target number from data attribute
-                    const duration = 1500; // Animation duration in milliseconds (1.5 seconds)
-
-                    // Avoid division by zero if duration is too short or target is 0
-                    if (target === 0) {
+                    counters.forEach(counter => {
                         counter.innerText = '0';
-                        return;
-                    }
-                    if (duration <= 0) {
-                        counter.innerText = target;
-                        return;
-                    }
+                        const target = +counter.getAttribute('data-target');
+                        const duration = 1500;
 
-                    // Calculate increment per frame (aiming for ~60fps)
-                    const increment = target / (duration / 16.67); // Rough estimate
+                        if (target === 0) { counter.innerText = '0'; return; }
+                        if (duration <= 0) { counter.innerText = target; return; }
 
-                    let current = 0;
+                        const increment = target / (duration / 16.67);
+                        let current = 0;
 
-                    // Function to update the counter value smoothly
-                    const updateCounter = () => {
-                        current += increment;
-                        if (current < target) {
-                            counter.innerText = Math.ceil(current); // Update displayed number
-                            requestAnimationFrame(updateCounter); // Continue animation loop
-                        } else {
-                            counter.innerText = target; // Ensure final target value is precise
-                            // Optional: Add back suffix like '+' if needed based on another data attribute
-                            // if (counter.dataset.suffix) { counter.innerText += counter.dataset.suffix; }
-                        }
-                    };
-                    requestAnimationFrame(updateCounter); // Start the animation loop
-                });
+                        const updateCounter = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        requestAnimationFrame(updateCounter);
+                    });
+                    observer.unobserve(entry.target); // Unobserve after running
+                }
+            });
+        };
 
-                observer.unobserve(entry.target); // Stop observing metrics section once animated
-            }
-        });
-    };
-
-    // Create the observer for the counter
-    const counterObserver = new IntersectionObserver(counterObserverCallback, counterObserverOptions);
-
-    // Start observing the metrics section only if it exists on the page
-    if (metricsSection) {
+        const counterObserver = new IntersectionObserver(counterObserverCallback, counterObserverOptions);
         counterObserver.observe(metricsSection);
     }
 
 
-    // --- Expertise Item Expand/Collapse ---
-    // Adds click functionality to '.expertise-item' elements. Clicking the item
-    // (but not the main link) toggles visibility of '.expertise-details'.
+    // --- Expertise Item Flip Card with Resize ---
+    // Adds click/keyboard functionality to '.expertise-item.card' elements.
+    // Toggles '.expanded' class to trigger CSS flip.
+    // Calculates and applies height for the back face content dynamically.
     // ============================================================
-    const expertiseItems = document.querySelectorAll('.expertise-item');
+    const expertiseItemsFlip = document.querySelectorAll('.expertise-item.card');
 
-    expertiseItems.forEach(item => {
-        // Make item focusable for keyboard navigation
-        item.setAttribute('tabindex', '0');
+    expertiseItemsFlip.forEach(item => {
+        const cardInner = item.querySelector('.card-inner');
+        const cardFront = item.querySelector('.card-front');
+        const cardBack = item.querySelector('.card-back');
+
+        // Ensure necessary card structure exists
+        if (!cardInner || !cardFront || !cardBack) {
+            console.error('Card structure missing inside an expertise-item:', item);
+            return; // Skip this item
+        }
+
+        // Function to handle toggling expansion and height
+        const toggleExpansion = (currentItem) => {
+            const isExpanding = !currentItem.classList.contains('expanded');
+
+            // Close other items before opening/closing the current one
+            expertiseItemsFlip.forEach(otherItem => {
+                if (otherItem !== currentItem && otherItem.classList.contains('expanded')) {
+                    otherItem.classList.remove('expanded');
+                    const otherCardInner = otherItem.querySelector('.card-inner');
+                    const otherFrontHeight = otherItem.querySelector('.card-front')?.offsetHeight;
+                    if (otherCardInner && otherFrontHeight) {
+                        otherCardInner.style.height = `${otherFrontHeight}px`; // Collapse others to front height
+                    } else if (otherCardInner) {
+                        otherCardInner.style.height = ''; // Fallback reset
+                    }
+                }
+            });
+
+            // Toggle the class on the current item
+            currentItem.classList.toggle('expanded');
+
+            // --- Adjust Height ---
+            if (isExpanding) {
+                // Calculate height needed for the back face AFTER flip starts or is measurable
+                // Use setTimeout to allow CSS transition to start/elements to potentially become measurable
+                setTimeout(() => {
+                    const backContentHeight = cardBack.scrollHeight; // Includes padding
+                    const frontHeight = cardFront.offsetHeight;
+                    const targetHeight = Math.max(backContentHeight, frontHeight); // Ensure it's at least front height
+                    cardInner.style.height = `${targetHeight}px`;
+                 }, 50); // Small delay - adjust if needed
+
+            } else {
+                // Collapse: Set height back to front face height immediately for animation
+                const frontHeight = cardFront.offsetHeight;
+                cardInner.style.height = `${frontHeight}px`;
+                // Optionally remove the style completely after transition if needed
+                 // setTimeout(() => {
+                 //    // Check if it's still collapsed before removing height
+                 //    if (!currentItem.classList.contains('expanded')) {
+                 //        cardInner.style.height = '';
+                 //    }
+                 // }, 600); // Match CSS transition duration
+            }
+        }; // End toggleExpansion function
 
         // --- Click Event Listener ---
         item.addEventListener('click', function(event) {
             let targetElement = event.target;
             let isLinkClick = false;
 
-            // Check if the click originated from the H3 or A tag within this item
             while (targetElement && targetElement !== this) {
-                if (targetElement.tagName === 'A' || targetElement.tagName === 'H3') {
-                    isLinkClick = true;
+                if (targetElement.tagName === 'A') {
+                     // Allow details link on back to work without toggling expansion state
+                     if (targetElement.classList.contains('details-link') && this.classList.contains('expanded')) {
+                         // Let the link work normally without interfering
+                         isLinkClick = false; // Treat as non-toggling click
+                     } else {
+                         isLinkClick = true; // It's the main link on the front or details link before expansion
+                     }
+                    break;
+                }
+                 if (targetElement.tagName === 'H3' && !this.classList.contains('expanded')) {
+                    isLinkClick = true; // Click on H3 counts as link click only when on front
                     break;
                 }
                 targetElement = targetElement.parentNode;
             }
 
-            // Only toggle if the click was NOT on the main link area
             if (!isLinkClick) {
-                // Close any other items that might be open
-                expertiseItems.forEach(otherItem => {
-                    if (otherItem !== this && otherItem.classList.contains('expanded')) {
-                        otherItem.classList.remove('expanded');
-                    }
-                });
-                // Toggle the 'expanded' class on the clicked item
-                this.classList.toggle('expanded');
+                toggleExpansion(this);
             }
-            // If it was a link click, the default browser navigation will handle it
+            // If isLinkClick is true, do nothing, let the link navigate
         });
 
-        // --- Keyboard Event Listener (Accessibility) ---
+        // --- Keyboard Event Listener ---
         item.addEventListener('keydown', function(event) {
-            // Check if Enter or Space key was pressed while item is focused
             if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault(); // Prevent default action (e.g., space scrolling)
-
-                // Close any other items that might be open
-                expertiseItems.forEach(otherItem => {
-                    if (otherItem !== this && otherItem.classList.contains('expanded')) {
-                        otherItem.classList.remove('expanded');
-                    }
-                });
-                // Toggle the 'expanded' class on the focused item
-                this.classList.toggle('expanded');
+                event.preventDefault();
+                toggleExpansion(this);
             }
         });
-    });
+
+        // --- Set Initial Height ---
+        const setInitialHeight = () => {
+            const initialFrontHeight = cardFront.offsetHeight;
+             // Only set height if it hasn't been explicitly set (e.g. by being expanded/collapsed already)
+            if (initialFrontHeight > 0 && !item.classList.contains('expanded') && !cardInner.style.height) {
+                 cardInner.style.height = `${initialFrontHeight}px`;
+            }
+        }
+
+        // Set height on load and potentially slight delay for images/fonts
+        window.addEventListener('load', setInitialHeight);
+        setTimeout(setInitialHeight, 200); // Fallback delay
+        setInitialHeight(); // Attempt immediate set
+
+    }); // End forEach expertiseItemsFlip
 
 
     // --- Auto-Update Copyright Year ---
-    // Finds element with id="current-year" and sets its text to the current year.
     // ============================================================
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) {

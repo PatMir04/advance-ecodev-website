@@ -631,75 +631,94 @@ footer {
    ========================================================================== */
 
 /* ≤ 992px – two‑column at ~180px each */
-@media (max-width: 992px) {
+@media (max-width: 992px) { /* Tablet */
   .container { width: 92%; }
   main h2 { font-size: 2em; }
   #hero h1 { font-size: 2.6em; }
   #hero .subheading { font-size: 1.2em; }
+  header li { margin-left: 20px; }
 
-  .expertise-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
-  }
+  /* Adjust card size for Tablet */
   .expertise-item.card {
-    max-width: 260px;      /* caps the card width, but it can shrink */
-    margin: 0 auto;        /* centers in its grid cell */
+    width: 160px; /* Initial size */
+    height: 160px;
   }
-  /* allow the back‑face to grow when flipped */
-  .expertise-item.expanded .card-inner {
-    height: auto !important;
+  .expertise-item.expanded {
+    width: 280px; /* Expanded size */
+    height: 280px;
   }
+  /* Adjust padding/fonts if needed */
+  .card-front, .card-back { padding: 18px; }
+  .card-front .icon-placeholder { font-size: 2.2em; }
+  .card-front h3 { font-size: 0.95em; }
+  .expertise-details p { font-size: 0.8em; }
+  .details-link { font-size: 0.8em; }
 }
 
-/* ≤ 768px – single‑column stack */
-@media (max-width: 768px) {
-  header, header nav, header #branding {
-    text-align: center;
-    float: none;
-  }
-  #hero {
-    padding: 60px 20px;
-    min-height: 350px;
-  }
+@media (max-width: 768px) { /* Mobile */
+  header { position: relative; padding: 10px 0; }
+  header #branding, header nav { float: none; text-align: center; }
+  header #branding { margin-bottom: 10px; }
+  header nav { margin-top: 0; }
+  header ul { line-height: 1.5; }
+  header li { margin: 5px 10px; }
+  #hero { padding: 60px 20px; min-height: 350px; }
   #hero h1 { font-size: 2.1em; }
   #hero .subheading { font-size: 1.1em; }
-  .cta-buttons .button {
-    display: block;
-    margin: 15px auto;
-    width: 80%;
-    max-width: 320px;
-  }
-  main h2 { font-size: 1.8em; }
+  .cta-buttons .button { display: block; margin: 15px auto; width: 80%; max-width: 320px; }
+  section { padding: 40px 0; }
+  main h2 { font-size: 1.8em; margin-bottom: 30px; }
+  .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 25px; } /* Allow slightly smaller columns */
+  .metrics-grid, .case-study-grid, .testimonial-container { grid-template-columns: 1fr; gap: 25px; }
+  .footer-content { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+  .footer-info, .footer-nav, .footer-social { margin-bottom: 20px; }
+  .footer-social a { margin: 0 8px; }
 
-  .expertise-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+  /* Adjust card size for Mobile */
   .expertise-item.card {
-    max-width: 100%;
-    margin: 0;           /* full‑width stacking */
+    width: 140px; /* Initial size */
+    height: 140px;
   }
+  .expertise-item.expanded {
+    width: 250px; /* Expanded size - Less drastic increase */
+    height: 250px;
+  }
+  /* Adjust padding/fonts */
+  .card-front, .card-back { padding: 15px; }
+  .card-front .icon-placeholder { font-size: 2em; margin-bottom: 8px;}
+  .card-front h3 { font-size: 0.9em;}
+  .expertise-details p { font-size: 0.8em; }
+  .details-link { font-size: 0.8em; }
 }
 
-/* ≤ 480px – tighten padding and gaps */
-@media (max-width: 480px) {
-  body { font-size: 15px; }
-  .container { width: 95%; padding: 0 15px; }
-  header #branding h1 { font-size: 22px; }
-  main h2 { font-size: 1.6em; }
-  main h3 { font-size: 1.2em; }
-  #hero h1 { font-size: 1.9em; }
+@media (max-width: 480px) { /* Smaller mobile */
+    body { font-size: 15px; }
+    .container { width: 95%; padding-left: 15px; padding-right: 15px; }
+    header #branding h1 a { font-size: 22px; }
+    header li { margin: 3px 8px; }
+    main h2 { font-size: 1.6em; }
+    main h3 { font-size: 1.2em; }
+    #hero h1 { font-size: 1.9em; }
+    #hero .subheading { font-size: 1em; }
+    .metric-number { font-size: 2.8em; }
+    .testimonial p { font-size: 1em; }
+    .case-study img { height: 180px; }
+    .footer-content { gap: 15px; }
 
-  .expertise-grid { gap: 15px; }
-  .expertise-item.card {
-    margin: 0;          /* no extra side‑margins */
-  }
-  .card-front,
-  .card-back {
-    padding: 12px;      /* leaner face padding */
-  }
-  .card-front .icon-placeholder { font-size: 2em; }
-  .card-front h3               { font-size: 0.9em; }
-  .expertise-details p         { font-size: 0.8em; }
-  .details-link                { font-size: 0.8em; }
+    /* Adjust card size for Small Mobile */
+    .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 20px; } /* Allow slightly smaller columns */
+    .expertise-item.card {
+        width: 130px; /* Initial size */
+        height: 130px;
+    }
+    .expertise-item.expanded {
+        width: 230px; /* Expanded size - Even smaller increase */
+        height: 230px;
+    }
+    /* Adjust padding/fonts */
+     .card-front, .card-back { padding: 10px; }
+     .card-front .icon-placeholder { font-size: 1.8em; margin-bottom: 5px;}
+     .card-front h3 { font-size: 0.8em;}
+     .expertise-details p { font-size: 0.75em; }
+     .details-link { font-size: 0.75em; }
 }

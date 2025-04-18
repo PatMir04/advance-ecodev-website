@@ -5,21 +5,21 @@
 /* --- Theme Configuration: CSS Variables --- */
 :root {
   /* Color Palette */
-  --primary-blue: #014f86;         /* Trustworthy, strong blue */
-  --dark-blue: #013a63;            /* Dark blue for contrast and footer */
-  --accent-orange: #e8491d;        /* High-visibility call-to-action */
-  --light-blue-accent: #a9d6e5;     /* Subtle highlight blue */
+  --primary-blue: #014f86;
+  --dark-blue: #013a63;
+  --accent-orange: #e8491d;
+  --light-blue-accent: #a9d6e5;
 
   /* Text Colors */
-  --text-dark: #333333;            /* Primary text color */
-  --text-medium: #555555;          /* Secondary text color */
-  --text-light: #ffffff;           /* Text on dark backgrounds */
-  --text-on-alt-bg: #e0e0e0;        /* Text for light accents on dark */
+  --text-dark: #333333;
+  --text-medium: #555555;
+  --text-light: #ffffff;
+  --text-on-alt-bg: #e0e0e0;
 
   /* Backgrounds and Borders */
-  --background-light: #ffffff;     /* Main background */
-  --background-alt: #f8f9fa;       /* Alternative section background */
-  --border-light: #e0e0e0;         /* Light borders for subtle accents */
+  --background-light: #ffffff;
+  --background-alt: #f8f9fa;
+  --border-light: #e0e0e0;
 
   /* Typography */
   --font-stack: "Avenir Book", "Avenir Next", "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -32,7 +32,7 @@
   --container-max-width: 1200px;
   --border-radius-small: 5px;
   --border-radius-medium: 8px;
-  --border-radius-large: 25px;     /* For rounded buttons */
+  --border-radius-large: 25px;
 
   /* Transitions */
   --transition-speed: 0.3s;
@@ -42,31 +42,26 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
-
 html {
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  scroll-behavior: smooth;
 }
-
 body {
   font-family: var(--font-stack);
   font-weight: var(--font-weight-book);
   line-height: 1.7;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   background-color: var(--background-light);
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-x: hidden;
 }
-
 .container {
   width: var(--container-width);
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 20px;
 }
-
 img {
   max-width: 100%;
   height: auto;
@@ -80,13 +75,10 @@ header {
   padding: 15px 0;
   border-bottom: 1px solid var(--border-light);
   position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
-
 header a {
   color: var(--primary-blue);
   text-decoration: none;
@@ -95,74 +87,52 @@ header a {
   font-weight: var(--font-weight-semibold);
   transition: color var(--transition-speed) ease;
 }
-
 header #branding {
-  float: left;
-  padding-top: 2px;
+  float: left; padding-top: 2px;
 }
-
 header #branding h1 {
-  margin: 0;
-  line-height: 1;
+  margin: 0; line-height: 1;
 }
-
 header #branding h1 a {
   color: var(--text-dark);
   text-transform: none;
   font-size: 24px;
   font-weight: var(--font-weight-bold);
 }
-
-header #branding h1 .highlight {
+header #branding .highlight {
   color: var(--primary-blue);
 }
-
 header nav {
-  float: right;
-  margin-top: 5px;
+  float: right; margin-top: 5px;
 }
-
 header ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+  padding: 0; margin: 0; list-style: none;
 }
-
 header li {
-  display: inline-block;
-  margin-left: 25px;
+  display: inline-block; margin-left: 25px;
 }
 header li:first-child {
   margin-left: 0;
 }
-
 header .current a,
 header a:hover {
   color: var(--accent-orange);
 }
-
-/* Clearfix */
 header .container::after {
-  content: "";
-  display: table;
-  clear: both;
+  content: ""; display: table; clear: both;
 }
 
 /* --- Section Base Styles --- */
 section {
   padding: 60px 0;
-  border: none;
-  background: none;
+  border: none; background: none;
 }
-
 section:nth-child(even) {
   background-color: var(--background-alt);
 }
-
 main h1, main h2, main h3 {
   font-weight: var(--font-weight-bold);
 }
-
 main h2 {
   font-size: 2.2em;
   margin: 0 0 40px;
@@ -170,14 +140,12 @@ main h2 {
   text-align: center;
   line-height: 1.3;
 }
-
 main h3 {
   font-size: 1.4em;
   margin: 0 0 15px;
   color: var(--primary-blue);
   line-height: 1.4;
 }
-
 .text-center {
   text-align: center;
 }
@@ -203,12 +171,10 @@ main h3 {
   text-align: center;
   line-height: normal;
 }
-
 .button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-
 .button-primary {
   background: var(--accent-orange);
   color: var(--text-light);
@@ -218,7 +184,6 @@ main h3 {
   background: #c4340a;
   border-color: #c4340a;
 }
-
 .button-secondary {
   background: transparent;
   color: var(--text-light);
@@ -248,15 +213,13 @@ section .button-secondary {
   justify-content: center;
   overflow: hidden;
 }
-
 #hero h1 {
   font-size: 3em;
   margin: 0 0 20px;
   font-weight: var(--font-weight-bold);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
   max-width: 900px;
 }
-
 #hero .subheading {
   font-size: 1.3em;
   margin: 0 0 35px;
@@ -269,7 +232,6 @@ section .button-secondary {
 #intro h2 {
   margin-bottom: 20px;
 }
-
 #intro p {
   max-width: 800px;
   margin: 0 auto;
@@ -285,33 +247,45 @@ section .button-secondary {
   gap: 30px;
   text-align: center;
   margin-top: 40px;
+  justify-content: center;
 }
 
-/* Expertise Flip‐Card Container */
+/* Expertise Flip‐Card Container (small square → large square on expand) */
 .expertise-item {
   position: relative;
   perspective: 1000px;
   background: var(--background-light);
-  padding: 25px 25px;
   border-radius: var(--border-radius-medium);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  transition: transform var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
   overflow: hidden;
 
-  /* ↑ New: ensure cards are tall enough ↑ */
-  min-height: 350px;
+  /* small square by default */
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  transition:
+    width var(--transition-speed) ease,
+    height var(--transition-speed) ease,
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
 }
 .expertise-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* On click (when .expanded is toggled), grow to large square */
+.expertise-item.expanded {
+  width: 300px;
+  height: 300px;
+  z-index: 10;
 }
 
 /* Flip Card Inner */
 .card-inner {
   position: relative;
   width: 100%;
-  height: 100%;         /* ↑ New: fill parent’s height ↑ */
+  height: 100%;
   transition: transform 0.6s ease;
   transform-style: preserve-3d;
 }
@@ -333,7 +307,6 @@ section .button-secondary {
   justify-content: center;
   text-align: center;
 }
-
 .card-front {
   z-index: 2;
 }
@@ -403,13 +376,14 @@ section .button-secondary {
   padding: 20px 25px;
   border-left: 5px solid var(--primary-blue);
   font-size: 1.05em;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  transition: transform var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
 }
 .differentiator-list li:hover {
   transform: translateX(5px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 .differentiator-list li strong {
   color: var(--dark-blue);
@@ -435,15 +409,13 @@ section .button-secondary {
   text-align: center;
 }
 .metric-number {
-  display: block;
   font-size: 3.2em;
   font-weight: var(--font-weight-bold);
   color: var(--light-blue-accent);
   margin-bottom: 5px;
 }
-.metric-label {
-  display: block;
-  font-size: 1em;
+.metric-label { 
+  font-size: 1em; 
   color: var(--text-on-alt-bg);
   font-weight: var(--font-weight-semibold);
 }
@@ -464,7 +436,7 @@ section .button-secondary {
   border-left: 5px solid var(--accent-orange);
   padding: 30px;
   border-radius: var(--border-radius-small);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.07);
   font-style: italic;
   position: relative;
 }
@@ -482,8 +454,7 @@ section .button-secondary {
   color: var(--accent-orange);
   opacity: 0.5;
   position: absolute;
-  left: -5px;
-  top: 15px;
+  left: -5px; top: 15px;
 }
 .testimonial footer {
   font-style: normal;
@@ -509,15 +480,16 @@ section .button-secondary {
   background: var(--background-light);
   border-radius: var(--border-radius-medium);
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  transition: transform var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition:
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
   display: flex;
   flex-direction: column;
 }
 .case-study:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 .case-study img {
   width: 100%;
@@ -540,7 +512,7 @@ section .button-secondary {
   color: var(--text-medium);
   line-height: 1.6;
   flex-grow: 1;
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .case-study .button {
   margin-top: auto;
@@ -585,10 +557,8 @@ section .button-secondary {
 .resource-list a::after {
   content: '';
   position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
+  width: 0; height: 2px;
+  bottom: 0; left: 50%;
   transform: translateX(-50%);
   background-color: var(--accent-orange);
   transition: width var(--transition-speed) ease;
@@ -651,7 +621,7 @@ footer {
 .footer-nav p,
 .footer-social p {
   margin: 0 0 15px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-light);
   font-size: 1.1em;
 }

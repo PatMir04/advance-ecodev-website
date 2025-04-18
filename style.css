@@ -378,7 +378,6 @@ main h3 {
   color: var(--dark-blue);
 }
 
-/* --- 5. Impact Metrics --- */
 /* --- 5. Impact Metrics (Improved) --- */
 #impact-metrics {
   background: linear-gradient(135deg, var(--dark-blue) 0%, #002a4e 100%);
@@ -440,6 +439,7 @@ main h3 {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 /* --- 6. Testimonials --- */
 #testimonials {

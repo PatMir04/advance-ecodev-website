@@ -146,7 +146,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
     box-shadow var(--transition-speed) ease,
     z-index 0s linear var(--transition-speed); /* Delay z-index change */
 }
-.expertise-item.card: hover {
+.expertise-item.card:hover {
     transform: none;
 }
 

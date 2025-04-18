@@ -70,6 +70,7 @@ img {
 /* --- Header --- */
 header {
   background: var(--background-light);
+  color: var(--text-dark);
   padding: 15px 0;
   border-bottom: 1px solid var(--border-light);
   position: sticky;
@@ -77,37 +78,47 @@ header {
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
+
 header a {
+  color: var(--primary-blue);
   text-decoration: none;
   text-transform: uppercase;
   font-size: 15px;
   font-weight: var(--font-weight-semibold);
-  color: var(--primary-blue);
   transition: color var(--transition-speed) ease;
 }
+
 header #branding {
   float: left;
   padding-top: 2px;
 }
+
 header #branding h1 {
   margin: 0;
-  line-height: 1;
+}
+
+header #branding h1 a {
+  color: var(--text-dark);
+  text-transform: none;
   font-size: 24px;
   font-weight: var(--font-weight-bold);
-  color: var(--text-dark);
 }
-header #branding .highlight {
+
+header #branding h1 .highlight {
   color: var(--primary-blue);
 }
+
 header nav {
   float: right;
   margin-top: 5px;
 }
+
 header ul {
-  margin: 0;
   padding: 0;
+  margin: 0;
   list-style: none;
 }
+
 header li {
   display: inline-block;
   margin-left: 25px;
@@ -115,14 +126,10 @@ header li {
 header li:first-child {
   margin-left: 0;
 }
+
 header .current a,
 header a:hover {
   color: var(--accent-orange);
-}
-header .container::after {
-  content: "";
-  display: table;
-  clear: both;
 }
 
 /* --- Section Base Styles --- */
@@ -601,41 +608,69 @@ main h3 {
 
 /* --- 10. Footer --- */
 footer {
-  background: var(--dark-blue);
+  background-color: var(--dark-blue);
   color: var(--text-on-alt-bg);
-  padding: 50px 0 20px;
+  padding: 40px 0 20px;
   font-size: 0.9em;
 }
+
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 30px 40px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  text-align: left;
 }
+
 .footer-info p,
 .footer-nav p,
 .footer-social p {
   margin-bottom: 15px;
   font-weight: var(--font-weight-bold);
+  color: var(--text-light);
+  font-size: 1.1em;
 }
+
+.footer-info a,
+.footer-nav a,
+.footer-social a {
+  color: var(--light-blue-accent);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.footer-info a:hover,
+.footer-nav a:hover,
+.footer-social a:hover {
+  color: var(--text-light);
+  text-decoration: underline;
+}
+
 .footer-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
+
+.footer-nav li {
+  margin-bottom: 10px;
+}
+
 .footer-social a {
   margin-right: 15px;
-  opacity: 0.8;
-  transition: opacity var(--transition-speed) ease;
+  display: inline-block;
 }
-.footer-social a:hover {
-  opacity: 1;
+
+.footer-social a:last-child {
+  margin-right: 0;
 }
+
 .footer-bottom {
   text-align: center;
   margin-top: 30px;
   padding-top: 20px;
   border-top: 1px solid var(--primary-blue);
+  font-size: 0.9em;
   color: #ccc;
 }
 

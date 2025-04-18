@@ -626,27 +626,62 @@ footer {
   color: #ccc;
 }
 
-/* --- Responsive Adjustments --- */
+/* ==========================================================================
+   Responsive Adjustments for Expertise Cards
+   ========================================================================== */
+
+/* ≤ 992px – two‑column at ~180px each */
 @media (max-width: 992px) {
   .container { width: 92%; }
   main h2 { font-size: 2em; }
   #hero h1 { font-size: 2.6em; }
   #hero .subheading { font-size: 1.2em; }
-  .expertise-item.card { width: 160px; height: 160px; }
-  .expertise-item.expanded .card-inner { height: auto; }
+
+  .expertise-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+  }
+  .expertise-item.card {
+    max-width: 260px;      /* caps the card width, but it can shrink */
+    margin: 0 auto;        /* centers in its grid cell */
+  }
+  /* allow the back‑face to grow when flipped */
+  .expertise-item.expanded .card-inner {
+    height: auto !important;
+  }
 }
 
+/* ≤ 768px – single‑column stack */
 @media (max-width: 768px) {
-  header, header nav, header #branding { text-align: center; float: none; }
-  #hero { padding: 60px 20px; min-height: 350px; }
+  header, header nav, header #branding {
+    text-align: center;
+    float: none;
+  }
+  #hero {
+    padding: 60px 20px;
+    min-height: 350px;
+  }
   #hero h1 { font-size: 2.1em; }
   #hero .subheading { font-size: 1.1em; }
-  .cta-buttons .button { display: block; margin: 15px auto; width: 80%; max-width: 320px; }
+  .cta-buttons .button {
+    display: block;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 320px;
+  }
   main h2 { font-size: 1.8em; }
-  .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-  .expertise-item.card { width: 140px; height: 140px; }
+
+  .expertise-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .expertise-item.card {
+    max-width: 100%;
+    margin: 0;           /* full‑width stacking */
+  }
 }
 
+/* ≤ 480px – tighten padding and gaps */
 @media (max-width: 480px) {
   body { font-size: 15px; }
   .container { width: 95%; padding: 0 15px; }
@@ -654,7 +689,17 @@ footer {
   main h2 { font-size: 1.6em; }
   main h3 { font-size: 1.2em; }
   #hero h1 { font-size: 1.9em; }
-  .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
-  .expertise-item.card { width: 120px; height: 120px; }
-}
 
+  .expertise-grid { gap: 15px; }
+  .expertise-item.card {
+    margin: 0;          /* no extra side‑margins */
+  }
+  .card-front,
+  .card-back {
+    padding: 12px;      /* leaner face padding */
+  }
+  .card-front .icon-placeholder { font-size: 2em; }
+  .card-front h3               { font-size: 0.9em; }
+  .expertise-details p         { font-size: 0.8em; }
+  .details-link                { font-size: 0.8em; }
+}

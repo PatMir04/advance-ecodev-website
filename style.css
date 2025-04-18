@@ -872,6 +872,15 @@ footer {
 /* --- Services Page Specific Styles --- */
 
 /* Services Hero Overrides */
+#services-hero.subpage-hero .container {
+  text-align: center;            /* centers inline text */
+  /* or use flex if you want more control:
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  */
+}
 #services-hero.subpage-hero h1 {
   font-size: 2.8em;
   line-height: 1.2;

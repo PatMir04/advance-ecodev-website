@@ -871,7 +871,19 @@ footer {
 
 /* --- Services Page Specific Styles --- */
 
-/* Using subpage hero styles defined previously */
+/* Services Hero Overrides */
+#services-hero.subpage-hero h1 {
+  font-size: 2.8em;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+#services-hero.subpage-hero .subheading {
+  font-size: 1.25em;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+  line-height: 1.5;
+}
 
 /* Container for the list of services */
 .service-details-container {

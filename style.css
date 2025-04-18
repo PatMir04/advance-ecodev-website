@@ -136,13 +136,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   overflow: visible; /* Allow flip */
   cursor: pointer;
   aspect-ratio: 1 / 1;      /* always a square */
-  /* width: 300px;             /* small square base */
 
-  /* --- Fixed Size - Small Square --- */
- /* width: 300px;  /* Slightly larger initial square? Adjust as needed */
- /* height: 300px; /* Match width for square */
- /* margin-left: auto;  /* Center item within grid cell */
-  /* margin-right: auto; /* Center item within grid cell */
 
   /* Transition width, height, transform, shadow */
   transition:
@@ -157,31 +151,19 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* Expanded State - Fixed Larger Square */
-.expertise-item.expanded {
-  /* --- Fixed Size - Large Square --- */
-  /* width: 320px;  /* Adjust target size */
-  /* height: 320px; /* Match width */
-  width: 200%;           /* Span two cells, for example */
-  aspect-ratio: 1 / 1; 
-  z-index: 10; /* Bring expanded card to front */
-  /* Re-center potentially using negative margins if needed - depends on grid */
-  /* Example: margin-left: calc( (100% - 320px) / 2 ); */
-}
-
-/* Inner element that flips */
+/* Inner element that performs the flip */
 .card-inner {
   position: relative;
   width: 100%;
-  height: 100%; /* Fills parent's fixed height */
+  height: 100%; /* Fill parent's fixed height */
   transition: transform var(--flip-speed) ease;
   transform-style: preserve-3d;
 }
 .expertise-item.expanded .card-inner {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg); /* The actual flip */
 }
 
-/* Front and Back faces */
+/* Front and Back faces styling */
 .card-front,
 .card-back {
   position: absolute;
@@ -189,36 +171,27 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* Hide back face during flip */
   backface-visibility: hidden;
-  border-radius: inherit; /* Inherit from .expertise-item */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-radius: inherit; /* Use parent's border-radius */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Shadow on faces */
   background: var(--background-light);
-  /* Padding on faces */
-  padding: 20px; /* Adjust padding for fixed size */
+  padding: 20px; /* Padding inside faces - Adjust as needed */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
   text-align: center;
-  overflow: hidden; /* Hide overflow within faces initially */
-}
-/* Allow scrolling on back face if content overflows FIXED size */
-.card-back {
-  transform: rotateY(180deg);
-  justify-content: flex-start;
-  align-items: flex-start;
-  text-align: left;
-  overflow-y: auto;
+  overflow: hidden; /* Hide overflow within face unless it's the back */
 }
 
-/* Allow scrolling on back face if content overflows FIXED size */
+/* Back face specific overrides */
 .card-back {
-  transform: rotateY(180deg);
-  justify-content: flex-start;
-  align-items: flex-start;
+  transform: rotateY(180deg); /* Initially rotated */
+  justify-content: flex-start; /* Align content top */
+  align-items: flex-start; /* Align content left */
   text-align: left;
-  overflow-y: auto;
+  overflow-y: auto; /* Allow scrolling ONLY on back if content too tall */
 }
 
 /* Content Styling (adjust font sizes for fixed containers) */

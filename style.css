@@ -146,41 +146,52 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
     box-shadow var(--transition-speed) ease,
     z-index 0s linear var(--transition-speed); /* Delay z-index change */
 }
-/* make the whole card clickable */
-.expertise-item.card {
-  cursor: pointer;
+.expertise-item.card:hover {
+  transform: translateY(-6px); /* Keep hover lift */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* ensure both faces are hidden when flipped */
-.card-front,
-.card-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* container that actually flips */
+/* Inner element that performs the flip */
 .card-inner {
   position: relative;
   width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
+  height: 100%; /* Fill parent's fixed height */
   transition: transform var(--flip-speed) ease;
-  -webkit-transition: -webkit-transform var(--flip-speed) ease;
-  transform: rotateY(0deg);
-  -webkit-transform: rotateY(0deg);
+  transform-style: preserve-3d;
+}
+.expertise-item.expanded .card-inner {
+  transform: rotateY(180deg); /* The actual flip */
 }
 
-/* the back face sits rotated 180° under the front */
+/* Front and Back faces styling */
+.card-front,
 .card-back {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Hide back face during flip */
+  backface-visibility: hidden;
+  border-radius: inherit; /* Use parent's border-radius */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Shadow on faces */
+  background: var(--background-light);
+  padding: 20px; /* Padding inside faces - Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  text-align: center;
+  overflow: hidden; /* Hide overflow within face unless it's the back */
 }
 
-/* when JS adds `.expanded`, we rotate the inner wrapper */
-.expertise-item.card.expanded .card-inner {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
+/* Back face specific overrides */
+.card-back {
+  transform: rotateY(180deg); /* Initially rotated */
+  justify-content: flex-start; /* Align content top */
+  align-items: flex-start; /* Align content left */
+  text-align: left;
+  overflow-y: auto; /* Allow scrolling ONLY on back if content too tall */
 }
 
 /* Content Styling (adjust font sizes for fixed containers) */

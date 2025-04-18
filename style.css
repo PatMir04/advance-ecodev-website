@@ -721,7 +721,7 @@ footer {
 }
 .subpage-hero h1 {
     font-size: 2.5em;
-    color: var(--text-light);
+    color: var(----light-blue-accent);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     margin-bottom: 10px;
 }

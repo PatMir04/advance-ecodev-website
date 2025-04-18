@@ -160,8 +160,10 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
 /* Expanded State - Fixed Larger Square */
 .expertise-item.expanded {
   /* --- Fixed Size - Large Square --- */
-  width: 320px;  /* Adjust target size */
-  height: 320px; /* Match width */
+  /* width: 320px;  /* Adjust target size */
+  /* height: 320px; /* Match width */
+  width: 200%;           /* Span two cells, for example */
+  aspect-ratio: 1 / 1; 
   z-index: 10; /* Bring expanded card to front */
   /* Re-center potentially using negative margins if needed - depends on grid */
   /* Example: margin-left: calc( (100% - 320px) / 2 ); */

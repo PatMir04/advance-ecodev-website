@@ -135,12 +135,14 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   overflow: visible; /* Allow flip */
   cursor: pointer;
+  aspect-ratio: 1 / 1;      /* always a square */
+  width: 150px;             /* small square base */
 
   /* --- Fixed Size - Small Square --- */
-  width: 300px;  /* Slightly larger initial square? Adjust as needed */
-  height: 300px; /* Match width for square */
-  margin-left: auto;  /* Center item within grid cell */
-  margin-right: auto; /* Center item within grid cell */
+ /* width: 300px;  /* Slightly larger initial square? Adjust as needed */
+ /* height: 300px; /* Match width for square */
+ /* margin-left: auto;  /* Center item within grid cell */
+  /* margin-right: auto; /* Center item within grid cell */
 
   /* Transition width, height, transform, shadow */
   transition:

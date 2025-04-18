@@ -639,6 +639,22 @@ footer {
   color: #ccc;
 }
 
+
+/* ——————————————
+   Brand Highlight Override
+   —————————————— */
+header #branding h1 {
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  color: var(--text-dark);              /* “EcoDev Solutions” color */
+}
+
+header #branding h1 .highlight {
+  color: var(--accent-orange) !important;  /* “Advance” in orange */
+}
+
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 992px) {
   .container { width: 92%; }

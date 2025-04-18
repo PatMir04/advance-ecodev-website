@@ -865,3 +865,129 @@ footer {
     .values-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
     .approach-details p { padding-left: 20px; }
 }
+
+
+
+
+/* --- Services Page Specific Styles --- */
+
+/* Using subpage hero styles defined previously */
+
+/* Container for the list of services */
+.service-details-container {
+    margin-top: 40px;
+}
+
+/* Individual service section styling */
+.service-item-detailed {
+    padding: 40px; /* Add padding within the section */
+    margin-bottom: 30px; /* Space between service sections */
+    border-radius: var(--border-radius-medium);
+    background-color: var(--background-light);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    /* Optional: Add subtle border */
+    /* border: 1px solid var(--border-light); */
+    display: grid; /* Use grid for layout */
+    grid-template-columns: auto 1fr; /* Icon column size auto, text fills rest */
+    gap: 30px; /* Space between icon and text */
+    align-items: flex-start; /* Align icon top */
+}
+
+/* Alternate background for visual separation */
+.service-item-detailed.alt-bg {
+    background-color: var(--background-alt);
+}
+
+/* Service Icon Styling */
+.service-icon {
+    font-size: 3em; /* Adjust size */
+    color: var(--primary-blue);
+    margin-top: 5px; /* Align slightly */
+}
+
+/* Service Title */
+.service-item-detailed h2 {
+    grid-column: 2 / 3; /* Place in second column */
+    text-align: left; /* Align title left */
+    margin-bottom: 15px; /* Space below title */
+    font-size: 1.8em; /* Adjust size */
+    margin-top: 0;
+}
+
+/* Service Description Text */
+.service-description {
+    grid-column: 2 / 3; /* Place in second column */
+    text-align: left;
+    color: var(--text-medium);
+    font-size: 1.05em; /* Slightly larger font */
+    line-height: 1.8;
+}
+
+.service-description p {
+    margin-bottom: 1em; /* Space between paragraphs */
+}
+.service-description p:last-child {
+    margin-bottom: 1.5em; /* More space before button */
+}
+
+
+/* Smaller button variant */
+.button-small {
+    padding: 8px 20px;
+    font-size: 0.9em;
+    border-radius: var(--border-radius-small);
+}
+
+/* Responsive adjustments for Services Page */
+@media (max-width: 768px) {
+    .service-item-detailed {
+        grid-template-columns: 1fr; /* Stack icon and text */
+        gap: 15px;
+        padding: 30px;
+        text-align: center; /* Center icon/text */
+    }
+     .service-item-detailed h2,
+     .service-description {
+        grid-column: 1 / 2; /* Reset grid column */
+        text-align: center; /* Center title/text */
+     }
+     .service-icon {
+        margin: 0 auto 10px auto; /* Center icon */
+     }
+     .service-item-detailed h2 {
+         font-size: 1.6em;
+     }
+     .service-description {
+         font-size: 1em;
+     }
+}
+
+@media (max-width: 480px) {
+     .service-item-detailed {
+         padding: 20px;
+     }
+     main h2 { /* Reduce section title size further */
+        font-size: 1.6em;
+     }
+}
+
+
+/* Concluding CTA on Services Page */
+#services-cta {
+    margin-top: 50px;
+    padding: 50px 20px;
+    background-color: var(--dark-blue); /* Use dark blue or alt */
+    color: var(--text-light);
+    border-radius: var(--border-radius-medium);
+}
+#services-cta h2 {
+    color: var(--text-light);
+}
+#services-cta p {
+     max-width: 650px;
+     margin-left: auto;
+     margin-right: auto;
+     margin-bottom: 25px;
+     opacity: 0.9;
+}
+/* Button styles defined globally work here */

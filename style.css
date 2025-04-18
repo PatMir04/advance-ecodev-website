@@ -121,7 +121,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   justify-content: center; /* Center grid items if row doesn't fill */
   /* Option 2: Try to force columns closer to item size */
   /* grid-template-columns: repeat(auto-fill, minmax(150px, max-content)); */
-  gap: 35px; /* Increased gap */
+  gap: 30px; /* Increased gap */
   margin-top: 40px;
   align-items: start;
 }
@@ -136,7 +136,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   overflow: visible; /* Allow flip */
   cursor: pointer;
   aspect-ratio: 1 / 1;      /* always a square */
-  width: 300px;             /* small square base */
+  /* width: 300px;             /* small square base */
 
   /* --- Fixed Size - Small Square --- */
  /* width: 300px;  /* Slightly larger initial square? Adjust as needed */

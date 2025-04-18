@@ -99,45 +99,56 @@ document.addEventListener('DOMContentLoaded', function() {
         const toggleExpansion = (currentItem) => {
             const isExpanding = !currentItem.classList.contains('expanded');
 
-            // Close other items before opening/closing the current one
+            // Close other items first
             expertiseItemsFlip.forEach(otherItem => {
                 if (otherItem !== currentItem && otherItem.classList.contains('expanded')) {
                     otherItem.classList.remove('expanded');
                     const otherCardInner = otherItem.querySelector('.card-inner');
                     const otherFrontHeight = otherItem.querySelector('.card-front')?.offsetHeight;
                     if (otherCardInner && otherFrontHeight) {
-                        otherCardInner.style.height = `${otherFrontHeight}px`; // Collapse others to front height
+                        // Set height explicitly for smooth collapse animation
+                        otherCardInner.style.height = `${otherFrontHeight}px`;
+                        // Optionally remove height style after transition if needed for resize responsiveness
+                         setTimeout(() => {
+                            if (!otherItem.classList.contains('expanded')) { // Check if still collapsed
+                                otherCardInner.style.height = '';
+                            }
+                        }, 600); // Match CSS transition duration (or slightly longer)
                     } else if (otherCardInner) {
                         otherCardInner.style.height = ''; // Fallback reset
                     }
                 }
             });
 
-            // Toggle the class on the current item
+            // Set target height BEFORE toggling class for expand
+            if (isExpanding) {
+                 // Need to calculate target height based on back content
+                 // Temporarily make back measurable (this is tricky, might cause flicker)
+                 // A simpler approach might involve pre-calculating or estimating.
+                 // Let's try measuring scrollHeight directly, might work if CSS is right.
+                const backContentHeight = cardBack.scrollHeight; // Includes padding
+                const frontHeight = cardFront.offsetHeight;
+                const targetHeight = Math.max(backContentHeight, frontHeight); // Use the larger height
+
+                 // Set height on card-inner BEFORE adding class to transition TO this height
+                cardInner.style.height = `${targetHeight}px`;
+            }
+
+            // Toggle the class on the current item AFTER setting target height (for expand)
             currentItem.classList.toggle('expanded');
 
-            // --- Adjust Height ---
-            if (isExpanding) {
-                // Calculate height needed for the back face AFTER flip starts or is measurable
-                // Use setTimeout to allow CSS transition to start/elements to potentially become measurable
-                setTimeout(() => {
-                    const backContentHeight = cardBack.scrollHeight; // Includes padding
-                    const frontHeight = cardFront.offsetHeight;
-                    const targetHeight = Math.max(backContentHeight, frontHeight); // Ensure it's at least front height
-                    cardInner.style.height = `${targetHeight}px`;
-                 }, 50); // Small delay - adjust if needed
-
-            } else {
-                // Collapse: Set height back to front face height immediately for animation
+            // Set height AFTER removing class (for collapse)
+            if (!isExpanding) {
+                // Set height back to front face height immediately for collapse transition
                 const frontHeight = cardFront.offsetHeight;
                 cardInner.style.height = `${frontHeight}px`;
-                // Optionally remove the style completely after transition if needed
-                 // setTimeout(() => {
-                 //    // Check if it's still collapsed before removing height
-                 //    if (!currentItem.classList.contains('expanded')) {
-                 //        cardInner.style.height = '';
-                 //    }
-                 // }, 600); // Match CSS transition duration
+                 // Optionally remove height style after transition
+                 setTimeout(() => {
+                    // Check if still collapsed before removing height
+                     if (!currentItem.classList.contains('expanded')) {
+                        cardInner.style.height = ''; // Let content determine height again
+                     }
+                 }, 600); // Match CSS transition duration
             }
         }; // End toggleExpansion function
 
@@ -148,17 +159,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             while (targetElement && targetElement !== this) {
                 if (targetElement.tagName === 'A') {
-                     // Allow details link on back to work without toggling expansion state
                      if (targetElement.classList.contains('details-link') && this.classList.contains('expanded')) {
-                         // Let the link work normally without interfering
-                         isLinkClick = false; // Treat as non-toggling click
+                         isLinkClick = false;
                      } else {
-                         isLinkClick = true; // It's the main link on the front or details link before expansion
+                         isLinkClick = true;
                      }
                     break;
                 }
                  if (targetElement.tagName === 'H3' && !this.classList.contains('expanded')) {
-                    isLinkClick = true; // Click on H3 counts as link click only when on front
+                    isLinkClick = true;
                     break;
                 }
                 targetElement = targetElement.parentNode;
@@ -167,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isLinkClick) {
                 toggleExpansion(this);
             }
-            // If isLinkClick is true, do nothing, let the link navigate
         });
 
         // --- Keyboard Event Listener ---
@@ -180,17 +188,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // --- Set Initial Height ---
         const setInitialHeight = () => {
-            const initialFrontHeight = cardFront.offsetHeight;
-             // Only set height if it hasn't been explicitly set (e.g. by being expanded/collapsed already)
-            if (initialFrontHeight > 0 && !item.classList.contains('expanded') && !cardInner.style.height) {
-                 cardInner.style.height = `${initialFrontHeight}px`;
+            // Ensure element is in DOM and visible enough to have height
+            if (cardFront.offsetHeight > 0) {
+                 // Set initial height only if not already expanded and no inline height is set
+                if (!item.classList.contains('expanded') && !cardInner.style.height) {
+                     cardInner.style.height = `${cardFront.offsetHeight}px`;
+                }
+            } else {
+                // Retry if offsetHeight is 0 initially (e.g. display:none parent)
+                setTimeout(setInitialHeight, 100);
             }
         }
+        // Use requestAnimationFrame for better timing if available
+        if (typeof requestAnimationFrame === 'function') {
+            requestAnimationFrame(setInitialHeight);
+        } else {
+             window.addEventListener('load', setInitialHeight); // Fallback
+        }
 
-        // Set height on load and potentially slight delay for images/fonts
-        window.addEventListener('load', setInitialHeight);
-        setTimeout(setInitialHeight, 200); // Fallback delay
-        setInitialHeight(); // Attempt immediate set
 
     }); // End forEach expertiseItemsFlip
 

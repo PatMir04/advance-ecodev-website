@@ -128,6 +128,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   transition: transform var(--hover-transition-speed) ease;
   overflow: visible; /* Allow flipping */
   cursor: pointer;
+  aspect-ratio: 1 / 1;
 }
 .expertise-item.card:hover {
   transform: translateY(-6px); /* Lift effect */

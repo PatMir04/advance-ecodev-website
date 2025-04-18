@@ -670,3 +670,23 @@ footer {
   .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
   .expertise-item.card { width: 120px; height: 120px; }
 }
+
+/* Stack expertise cards on phones */
+@media (max-width: 600px) {
+  .expertise-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;      /* a little less gap on mobile */
+  }
+
+  .expertise-item.card {
+    /* Let them fill the container width */
+    width: 100%;
+    aspect-ratio: auto;  /* Remove forced square if you prefer variable height */
+  }
+
+  .card-inner {
+    /* Ensure the flip faces still fill the card */
+    height: auto; 
+  }
+}
+

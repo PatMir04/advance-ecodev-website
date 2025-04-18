@@ -136,7 +136,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   overflow: visible; /* Allow flip */
   cursor: pointer;
   aspect-ratio: 1 / 1;      /* always a square */
-  width: 150px;             /* small square base */
+  width: 300px;             /* small square base */
 
   /* --- Fixed Size - Small Square --- */
  /* width: 300px;  /* Slightly larger initial square? Adjust as needed */

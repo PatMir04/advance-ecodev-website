@@ -146,21 +146,25 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
     box-shadow var(--transition-speed) ease,
     z-index 0s linear var(--transition-speed); /* Delay z-index change */
 }
-.expertise-item.card:hover {
-    transform: none;
-}
+/* .expertise-item.card:hover {
+   transform: none;
+} */
 
 /* Inner element that performs the flip */
 .card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%; /* Fill parent's fixed height */
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
   transition: transform var(--flip-speed) ease;
-  transform-style: preserve-3d;
 }
 .expertise-item.expanded .card-inner {
-  transform: rotateY(180deg); /* The actual flip */
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
+
+.card-front { z-index: 2; }
+.card-back  { z-index: 1; }
 
 /* Front and Back faces styling */
 .card-front,
@@ -186,11 +190,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
 
 /* Back face specific overrides */
 .card-back {
-  transform: rotateY(180deg); /* Initially rotated */
-  justify-content: flex-start; /* Align content top */
-  align-items: flex-start; /* Align content left */
-  text-align: left;
-  overflow-y: auto; /* Allow scrolling ONLY on back if content too tall */
+  transform: rotateY(180deg);
 }
 
 /* Content Styling (adjust font sizes for fixed containers) */

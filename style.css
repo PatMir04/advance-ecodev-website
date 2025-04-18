@@ -137,7 +137,7 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   cursor: pointer;
 
   /* --- Fixed Size - Small Square --- */
-  width: 200px;  /* Slightly larger initial square? Adjust as needed */
+  width: 220px;  /* Slightly larger initial square? Adjust as needed */
   height: 250px; /* Match width for square */
   margin-left: auto;  /* Center item within grid cell */
   margin-right: auto; /* Center item within grid cell */

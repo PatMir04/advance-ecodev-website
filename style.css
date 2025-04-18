@@ -292,7 +292,7 @@ section .button-secondary {
   position: relative;
   perspective: 1000px;
   background: var(--background-light);
-  padding: 30px 25px;
+  padding: 25px 25px;
   border-radius: var(--border-radius-medium);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
   transition: transform var(--transition-speed) ease,

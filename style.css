@@ -706,3 +706,161 @@ footer {
 /* ... (Keep these as they were) ... */
 .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity var(--scroll-animation-speed) ease-out, transform var(--scroll-animation-speed) ease-out; }
 .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+
+
+/* --- About Us Page Specific Styles --- */
+
+/* Style for subpage heroes (optional differentiation) */
+.subpage-hero {
+    background-color: var(--dark-blue); /* Example: Darker blue */
+    color: var(--text-light);
+    padding: 60px 20px;
+    text-align: center;
+    min-height: auto; /* Less height than main hero */
+}
+.subpage-hero h1 {
+    font-size: 2.5em;
+    color: var(--text-light);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+.subpage-hero .subheading {
+    font-size: 1.2em;
+    opacity: 0.85;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Lead paragraph style for emphasis */
+.lead-paragraph {
+    font-size: 1.15em;
+    color: var(--text-medium);
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px; /* Space below */
+}
+
+/* Mission & Vision Grid */
+#mission-vision {
+    background-color: var(--background-alt); /* Example background */
+}
+.mission-vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.mission-item, .vision-item {
+    background: var(--background-light);
+    padding: 30px;
+    border-radius: var(--border-radius-medium);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+}
+.mission-item h3, .vision-item h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+}
+.mission-item h3 .icon-placeholder,
+.vision-item h3 .icon-placeholder {
+    font-size: 1.5em; /* Adjust icon size */
+}
+
+
+/* Values Grid */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.value-item {
+    text-align: center;
+    padding: 20px;
+    /* Optional: Add border or background */
+    /* border: 1px solid var(--border-light); */
+    /* border-radius: var(--border-radius-small); */
+}
+.value-item .icon-placeholder {
+    font-size: 2.5em;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+    display: block;
+}
+.value-item h4 {
+    font-size: 1.1em;
+    color: var(--dark-blue);
+    margin-bottom: 10px;
+}
+.value-item p {
+    font-size: 0.9em;
+    color: var(--text-medium);
+}
+
+/* Approach Details */
+#approach {
+     background-color: var(--background-alt);
+}
+.approach-details {
+    max-width: 850px;
+    margin: 20px auto 0 auto;
+    text-align: left; /* Align details left */
+}
+.approach-details p {
+    margin-bottom: 15px;
+    padding-left: 25px; /* Indent for bullet look */
+    position: relative;
+}
+/* Add bullet points */
+.approach-details p::before {
+    content: '✓'; /* Or other character/icon */
+    color: var(--primary-blue);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+.approach-details p strong {
+     color: var(--dark-blue);
+}
+
+/* Team Section */
+#team .lead-paragraph {
+    margin-bottom: 0; /* Remove bottom margin if no grid follows */
+}
+/* Optional: Team Grid Styles if using Option A */
+/*
+.team-grid { ... }
+.team-member { ... }
+.team-member img { ... }
+*/
+
+/* About Page CTA */
+#about-cta {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+}
+#about-cta h2 {
+    color: var(--text-light);
+}
+#about-cta p {
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+/* Use existing button styles */
+
+/* Responsive adjustments for About Page */
+@media (max-width: 768px) {
+    .subpage-hero h1 { font-size: 2em; }
+    .lead-paragraph { font-size: 1.1em; }
+    .mission-vision-grid { gap: 25px; }
+    .values-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+    .approach-details p { padding-left: 20px; }
+}

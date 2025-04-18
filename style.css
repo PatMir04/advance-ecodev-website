@@ -715,7 +715,7 @@ footer {
 
 /* Style for subpage heroes (optional differentiation) */
 .subpage-hero {
-    background-color: var(--dark-blue); /* Example: Darker blue */
+    background-color: var(--primary-blue); /* Example: Darker blue */
     color: var(--text-light);
     padding: 60px 20px;
     text-align: center;

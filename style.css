@@ -169,32 +169,47 @@ section .button-secondary:hover { background: var(--text-dark); border-color: va
   /* Example: margin-left: calc( (100% - 320px) / 2 ); */
 }
 
-/* Make sure both faces are hidden in all browsers */
-.card-front,
-.card-back {
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
 /* Inner element that flips */
 .card-inner {
   position: relative;
   width: 100%;
-  height: 100%;
-  perspective-origin: center;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
+  height: 100%; /* Fills parent's fixed height */
   transition: transform var(--flip-speed) ease;
-  -webkit-transition: -webkit-transform var(--flip-speed) ease;
-  /* explicit start state */
-  transform: rotateY(0deg);
-  -webkit-transform: rotateY(0deg);
+  transform-style: preserve-3d;
+}
+.expertise-item.expanded .card-inner {
+  transform: rotateY(180deg);
 }
 
-/* Only when the card has BOTH classes “expertise-item card expanded” */
-.expertise-item.card.expanded .card-inner {
+/* Front and Back faces */
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: inherit; /* Inherit from .expertise-item */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background: var(--background-light);
+  /* Padding on faces */
+  padding: 20px; /* Adjust padding for fixed size */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden; /* Hide overflow within faces initially */
+}
+/* Allow scrolling on back face if content overflows FIXED size */
+.card-back {
   transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  overflow-y: auto;
 }
 
 /* Allow scrolling on back face if content overflows FIXED size */

@@ -630,24 +630,18 @@ footer {
    Responsive Adjustments for Expertise Cards
    ========================================================================== */
 
-/* ≤ 992px – two‑column at ~180px each */
+/* --- Responsive Adjustments --- */
+
 @media (max-width: 992px) { /* Tablet */
   .container { width: 92%; }
   main h2 { font-size: 2em; }
   #hero h1 { font-size: 2.6em; }
   #hero .subheading { font-size: 1.2em; }
   header li { margin-left: 20px; }
+  .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } /* Adjust min column width if needed */
 
-  /* Adjust card size for Tablet */
-  .expertise-item.card {
-    width: 160px; /* Initial size */
-    height: 160px;
-  }
-  .expertise-item.expanded {
-    width: 280px; /* Expanded size */
-    height: 280px;
-  }
-  /* Adjust padding/fonts if needed */
+  /* REMOVED fixed width/height for expertise items */
+  /* Adjust padding/fonts for card faces if needed */
   .card-front, .card-back { padding: 18px; }
   .card-front .icon-placeholder { font-size: 2.2em; }
   .card-front h3 { font-size: 0.95em; }
@@ -668,22 +662,14 @@ footer {
   .cta-buttons .button { display: block; margin: 15px auto; width: 80%; max-width: 320px; }
   section { padding: 40px 0; }
   main h2 { font-size: 1.8em; margin-bottom: 30px; }
-  .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 25px; } /* Allow slightly smaller columns */
+  .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 25px; } /* Grid handles sizing */
   .metrics-grid, .case-study-grid, .testimonial-container { grid-template-columns: 1fr; gap: 25px; }
   .footer-content { grid-template-columns: 1fr; text-align: center; gap: 20px; }
   .footer-info, .footer-nav, .footer-social { margin-bottom: 20px; }
   .footer-social a { margin: 0 8px; }
 
-  /* Adjust card size for Mobile */
-  .expertise-item.card {
-    width: 140px; /* Initial size */
-    height: 140px;
-  }
-  .expertise-item.expanded {
-    width: 250px; /* Expanded size - Less drastic increase */
-    height: 250px;
-  }
-  /* Adjust padding/fonts */
+  /* REMOVED fixed width/height for expertise items */
+  /* Adjust padding/fonts for card faces */
   .card-front, .card-back { padding: 15px; }
   .card-front .icon-placeholder { font-size: 2em; margin-bottom: 8px;}
   .card-front h3 { font-size: 0.9em;}
@@ -705,20 +691,18 @@ footer {
     .case-study img { height: 180px; }
     .footer-content { gap: 15px; }
 
-    /* Adjust card size for Small Mobile */
-    .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 20px; } /* Allow slightly smaller columns */
-    .expertise-item.card {
-        width: 130px; /* Initial size */
-        height: 130px;
-    }
-    .expertise-item.expanded {
-        width: 230px; /* Expanded size - Even smaller increase */
-        height: 230px;
-    }
+    /* Adjust grid for smaller items */
+    .expertise-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 20px; }
+    /* REMOVED fixed width/height for expertise items */
     /* Adjust padding/fonts */
-     .card-front, .card-back { padding: 10px; }
+     .card-front, .card-back { padding: 12px; }
      .card-front .icon-placeholder { font-size: 1.8em; margin-bottom: 5px;}
-     .card-front h3 { font-size: 0.8em;}
-     .expertise-details p { font-size: 0.75em; }
-     .details-link { font-size: 0.75em; }
+     .card-front h3 { font-size: 0.85em;} /* Slightly larger than previous */
+     .expertise-details p { font-size: 0.8em; } /* Slightly larger */
+     .details-link { font-size: 0.8em; }
 }
+
+/* --- Scroll Animation Styles --- */
+/* ... (Keep these as they were) ... */
+.animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity var(--scroll-animation-speed) ease-out, transform var(--scroll-animation-speed) ease-out; }
+.animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }

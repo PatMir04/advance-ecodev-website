@@ -1022,3 +1022,178 @@ footer {
      opacity: 0.9;
 }
 /* Button styles defined globally work here */
+
+
+/* ==========================================================================
+                  --- Expertise Page Specific Styles ---
+   ========================================================================== */
+
+
+#expertise-hero.subpage-hero {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 60px 20px;
+    text-align: center;
+    min-height: auto; /* Less height than main hero */
+}
+#expertise-hero.subpage-hero h1 {
+    font-size: 2.5em;
+    color: var(--light-blue-accent); 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+   font-weight: var(--font-weight-bold); 
+}
+#expertise-hero.subpage-hero .subheading {
+    font-size: 1.2em;
+    opacity: 0.85;
+    max-width: 700px;
+    margin: 0 auto;
+     /* Inherits color: var(--text-light) from .subpage-hero */
+}
+
+#expertise-hero.subpage-hero .container {
+  text-align: center;            /* centers inline text */
+  /* or use flex if you want more control:
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  */
+}
+
+/* Container for the list of expertise areas */
+.expertise-details-container { /* Can reuse service style or rename */
+    margin-top: 40px;
+}
+
+/* Individual expertise section styling */
+.expertise-item-detailed { /* Renamed class for clarity */
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius-medium);
+    background-color: var(--background-light);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    display: grid;
+    grid-template-columns: auto 1fr; /* Icon size auto, text fills rest */
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Alternate background for visual separation */
+.expertise-item-detailed.alt-bg {
+    background-color: var(--background-alt);
+}
+
+/* Expertise Icon Styling */
+.expertise-icon { /* Renamed class */
+    font-size: 3em;
+    color: var(--primary-blue);
+    margin-top: 5px;
+}
+
+/* Expertise Title */
+.expertise-item-detailed h2 {
+    grid-column: 2 / 3;
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    margin-top: 0;
+}
+
+/* Expertise Description Text */
+.expertise-description {
+    grid-column: 2 / 3;
+    text-align: left;
+    color: var(--text-medium);
+    font-size: 1.05em;
+    line-height: 1.8;
+}
+
+.expertise-description p:first-of-type { /* First paragraph */
+    margin-bottom: 1.5em; /* More space after intro paragraph */
+}
+
+.expertise-description ul {
+    list-style: disc; /* Use standard bullets */
+    margin-left: 20px; /* Indent list */
+    margin-bottom: 1.5em;
+}
+.expertise-description li {
+    margin-bottom: 0.5em; /* Space between list items */
+}
+
+.expertise-description p em { /* Style the 'Services Applied' text */
+    display: block; /* Put on its own line */
+    font-size: 0.9em;
+    color: var(--text-medium);
+    margin-top: 1.5em; /* Space above */
+    margin-bottom: 1.5em; /* Space below */
+}
+
+
+/* Using smaller button style defined previously */
+/* .button-small { ... } */
+
+
+/* Cross-Cutting Themes Section */
+#cross-cutting {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-light);
+}
+#cross-cutting h2 {
+    margin-bottom: 20px;
+}
+
+/* Concluding CTA */
+#expertise-cta { /* Specific ID for styling if needed */
+    margin-top: 50px;
+    padding: 50px 20px;
+    background-color: var(--dark-blue); /* Use dark blue */
+    color: var(--text-light);
+    border-radius: var(--border-radius-medium);
+}
+#expertise-cta h2 {
+    color: var(--text-light);
+}
+#expertise-cta p {
+     max-width: 650px;
+     margin-left: auto;
+     margin-right: auto;
+     margin-bottom: 25px;
+     opacity: 0.9;
+}
+
+/* Responsive adjustments for Expertise Page */
+@media (max-width: 768px) {
+    .expertise-item-detailed {
+        grid-template-columns: 1fr; /* Stack icon and text */
+        gap: 15px;
+        padding: 30px;
+        text-align: center; /* Center icon/text */
+    }
+     .expertise-item-detailed h2,
+     .expertise-description {
+        grid-column: 1 / 2; /* Reset grid column */
+        text-align: center; /* Center title/text */
+     }
+     .expertise-icon {
+        margin: 0 auto 10px auto; /* Center icon */
+     }
+     .expertise-item-detailed h2 {
+         font-size: 1.6em;
+     }
+     .expertise-description {
+         font-size: 1em;
+         text-align: left; /* Keep lists left-aligned */
+     }
+      .expertise-description ul {
+          margin-left: 5%; /* Adjust indent */
+          margin-right: 5%;
+      }
+      .expertise-description p em {
+          text-align: center;
+      }
+
+}
+/* Add further adjustments for 480px if needed */

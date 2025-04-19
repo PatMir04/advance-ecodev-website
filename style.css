@@ -1131,10 +1131,6 @@ footer {
 }
 
 
-/* Using smaller button style defined previously */
-/* .button-small { ... } */
-
-
 /* Cross-Cutting Themes Section */
 #cross-cutting {
     margin-top: 40px;
@@ -1197,7 +1193,43 @@ footer {
 
 }
 
-/* --- Team Section Styles --- */
+/* ==========================================================================
+                   --- Team Section Styles --- 
+   ========================================================================== */
+
+#team-hero.subpage-hero {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    padding: 60px 20px;
+    text-align: center;
+    min-height: auto; /* Less height than main hero */
+}
+#team-hero.subpage-hero h1 {
+    font-size: 2.5em;
+    color: var(--light-blue-accent); 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+   font-weight: var(--font-weight-bold); 
+}
+#team-hero.subpage-hero .subheading {
+    font-size: 1.2em;
+    opacity: 0.85;
+    max-width: 700px;
+    margin: 0 auto;
+     /* Inherits color: var(--text-light) from .subpage-hero */
+}
+
+#team-hero.subpage-hero .container {
+  text-align: center;            /* centers inline text */
+  /* or use flex if you want more control:
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  */
+}
+
+
 #team-listing { /* Updated ID if you used the suggestion */
     /* Add padding if desired */
     padding: 40px 0;

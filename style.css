@@ -1196,4 +1196,143 @@ footer {
       }
 
 }
-/* Add further adjustments for 480px if needed */
+
+/* --- Team Section Styles --- */
+#team-listing { /* Updated ID if you used the suggestion */
+    /* Add padding if desired */
+    padding: 40px 0;
+}
+#team-listing h2 { /* Style the main heading */
+    margin-bottom: 40px; /* Ensure space below heading */
+}
+#team-listing .lead-paragraph {
+     margin-bottom: 50px; /* Space between intro and grid */
+}
+
+
+.team-grid {
+    display: grid;
+    /* MODIFIED: Aim for max 2 columns on wide screens, min width ~320px */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px; /* Increase gap slightly */
+    margin: 40px auto 0 auto; /* Center grid and add top margin */
+    max-width: 850px; /* Set max width for 2-column layout */
+}
+
+.team-member {
+    background-color: var(--background-light);
+    border-radius: var(--border-radius-medium);
+    padding: 30px; /* Slightly increase padding */
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.09); /* Slightly stronger shadow */
+    transition: transform var(--hover-transition-speed) ease, box-shadow var(--hover-transition-speed) ease;
+    /* ADDED: Subtle top border */
+    border-top: 4px solid var(--primary-blue);
+    display: flex; /* Use flexbox for better internal alignment */
+    flex-direction: column; /* Stack content vertically */
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+}
+
+.team-photo {
+    width: 130px; /* Slightly larger photo */
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 20px auto; /* Increased bottom margin */
+    border: 4px solid var(--background-light); /* Inner border */
+    outline: 1px solid var(--border-light); /* Outer subtle outline */
+}
+
+.team-member h4 {
+    font-size: 1.4em; /* Larger name */
+    color: var(--dark-blue);
+    margin-bottom: 5px;
+}
+
+.team-title {
+    font-size: 1em;
+    color: var(--primary-blue);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 15px;
+    font-style: italic;
+    min-height: 2.5em; /* Reserve space even if title short */
+}
+
+.team-bio {
+    font-size: 0.95em; /* Slightly larger bio */
+    color: var(--text-medium);
+    line-height: 1.7; /* Improved line height */
+    margin-bottom: 20px;
+    text-align: left;
+    flex-grow: 1; /* Allow bio to push links down */
+}
+
+.team-links {
+    margin-top: auto; /* Pushes links to bottom */
+    padding-top: 15px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Slightly more gap */
+    flex-wrap: wrap;
+}
+
+.team-links a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    font-size: 0.9em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; /* Slightly more gap */
+}
+
+.team-links a .icon-placeholder {
+    font-size: 1.2em;
+}
+
+.team-links a:hover {
+    color: var(--accent-orange);
+    text-decoration: underline;
+}
+
+
+/* --- Responsive adjustments for Team Section --- */
+
+/* Tablet - Might stay 2 columns or drop to 1 depending on screen */
+@media (max-width: 992px) {
+     .team-grid {
+         max-width: 750px; /* Adjust max-width */
+         gap: 30px;
+     }
+     .team-photo { width: 120px; height: 120px; }
+}
+
+/* Mobile - Force single column */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr; /* Stack to single column */
+        max-width: 450px; /* Limit width in single column */
+        gap: 30px;
+    }
+     .team-photo { width: 110px; height: 110px; }
+     .team-member { padding: 25px; }
+     .team-member h4 { font-size: 1.3em; }
+     .team-title { font-size: 0.95em; }
+     .team-bio { font-size: 0.9em; }
+}
+
+@media (max-width: 480px) {
+     .team-grid {
+         max-width: 100%; /* Allow full width */
+         gap: 25px;
+     }
+     .team-member { padding: 20px; }
+     .team-photo { width: 100px; height: 100px; }
+     .team-member h4 { font-size: 1.2em; }
+
+}
